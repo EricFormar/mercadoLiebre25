@@ -23,7 +23,7 @@ router.get('/detail/:id', controller.detalle) // añado la ruta para mostrar los
 
 
 router.get('/add',sessionUserCheck, controller.agregar) //añado la ruta para añadir un nuevo producto
-router.get('/add/form', sessionUserCheck,controller.agregar) //añado la ruta para mostrar el formulario
+router.get('/add/form',controller.agregar) //añado la ruta para mostrar el formulario
 
 router.post('/add/form', upImagesProducts.any(), controller.publicar) //añado ruta para guardar publicacion de producto
 

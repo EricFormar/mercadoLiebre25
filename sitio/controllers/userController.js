@@ -4,15 +4,24 @@ const {validationResult} = require('express-validator'); //requiero validationRe
 module.exports = {
     login:function(req,res){
         res.render('userLogin',{
-            title:"Ingresá a tu cuenta"
+            title:"Ingresá a tu cuenta",
+            css:"index.css"
         })
     },
     processLogin: function(req,res){
+        req.session.user = "Yo";
 
+        if(req.session.url){
+            console.log("--------> " + req.session.url)
+             url = req.session.url
+        }
+        console.log(url)
+        return res.redirect(url)
     },
     register:function(req,res){
         res.render('userRegister',{
-            title:"Registro de usuario"
+            title:"Registro de usuario",
+            css:"index.css"
         })
     },
     processRegister:function(req,res,next){
@@ -23,6 +32,7 @@ module.exports = {
         else{
             res.render('userRegister',{
                 title: "Registro de usuario",
+                css:"index.css",
                 errors: errors.mapped(),
                 old:req.body
             })
@@ -31,6 +41,7 @@ module.exports = {
     profile: function(req, res) {
         res.render('userProfile', {
             title: "Perfil de usuario",
+            css:"profile.css",
             productos: dbProductos.filter(producto => {
                 return producto.category != "visited" & producto.category != "in-sale"
             }),

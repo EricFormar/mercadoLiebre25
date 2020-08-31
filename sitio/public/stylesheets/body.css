@@ -1,0 +1,19 @@
+.productos {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+section .titulo h2 {
+    text-align: left;
+    font-size: 24px;
+    color: var(--color-grisOscuro);
+    padding: 30px;
+}
+
+section .contenido {
+    background-color: white;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+}
