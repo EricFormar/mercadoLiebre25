@@ -1,0 +1,11 @@
+[
+    {
+        "id": 1,
+        "nombre": "Eric",
+        "apellido": "Mena",
+        "email": "menaericdaniel@gmail.com",
+        "ciudad": "Loma Hermosa",
+        "pass": "$2b$10$9MtfsLrAhATGzBrpWutQGuoyR8bjXQsDwyG3KgARLrtpWWXY/96.y",
+        "rol": "user"
+    }
+]

@@ -11,10 +11,12 @@ module.exports = { //exporto un objeto literal con todos los metodos
         res.render('products', {
                 title: "Todos los Productos",
                 css:'index.css',
-                productos: dbProducts
+                productos: dbProducts,
+                user: req.session.user
             }) //muestra información de los productos
     },
     search: function(req, res) {
+  
         let errors = validationResult(req); //devuelve los errores del formSearch
         
         if(errors.isEmpty()){ //si no hay errores, es decir que la consulta no venga vacía
@@ -28,10 +30,11 @@ module.exports = { //exporto un objeto literal con todos los metodos
         res.render('products', {
             title: "Resultado de la búsqueda",
             productos: productos,
-            css:'index.css'
+            css:'index.css',
+            user: req.session.user
         })
     }else{
-        return res.redirect(req.session.urlAnterior) //redirecciona a la pagina anterior
+        return res.redirect('/')
     }
     },
     detalle: function(req, res) {
@@ -44,7 +47,8 @@ module.exports = { //exporto un objeto literal con todos los metodos
                 title: "Detalle del Producto",
                 css:'product.css',
                 id: id,
-                producto: producto[0]
+                producto: producto[0],
+                user: req.session.user
             }) //muestra el detalle de un producto
     },
     agregar: function(req, res) {
@@ -59,7 +63,8 @@ module.exports = { //exporto un objeto literal con todos los metodos
                 css:'product.css',
                 categorias: dbCategories,
                 categoria: categoria,
-                sub: sub
+                sub: sub,
+                user: req.session.user
             }) //muestra el formulario para agregar un producto
     },
     publicar: function(req, res, next) {
@@ -107,16 +112,16 @@ module.exports = { //exporto un objeto literal con todos los metodos
         res.render('productShow', {
             title: "Ver / Editar Producto",
             css:'product.css',
+            user: req.session.user,
             total: dbProducts.length,
             producto: resultado[0],
             categorias: dbCategories,
             //envío las variables correspondientes para ser usadas en la vista
-            //**********************//
             activeEdit:activeEdit,
             activeDetail:activeDetail,
             showEdit:showEdit,
             showDetail:showDetail
-            //**********************//
+      
         })
 
     },

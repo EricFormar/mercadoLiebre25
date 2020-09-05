@@ -15,7 +15,6 @@ const formSearch = require('../validations/formSearch'); //valido que lo que lle
 const upImagesProducts = require('../middlewares/upImagesProducts'); //requiero el modulo que se encarga de guardar las imagenes, vía multer
 const sessionUserCheck = require('../middlewares/sessionUserCheck'); //chequeo si el usuario levantó sesión
 
-
 router.get('/', controller.listar) //construyo la ruta que me visualizará información de prueba
 router.get('/search', formSearch,controller.search); //añado una nueva ruta que se ocupe de la busqueda de productos
 

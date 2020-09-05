@@ -12,6 +12,7 @@ const controller = require('../controllers/userController')
 
 /*****************VALIDACIONES*********************/
 const registerValidator = require('../validations/registerValidator'); //valido los datos ingresados en el formulario de registro
+const loginValidator = require('../validations/loginValidator'); //valido los datos ingresados en el formulario de logueo
 
 
 /*****************RUTAS*********************/
@@ -19,8 +20,10 @@ router.get('/register',controller.register); //formulario de registro
 router.post('/register', registerValidator,controller.processRegister); //derivo al método que guardará al usuario
 
 router.get('/login', controller.login); //formulario de logueo
-router.post('/login',controller.processLogin) //derivo al método que procesará el login
+router.post('/login',loginValidator, controller.processLogin) //derivo al método que procesará el login
 
 router.get('/profile', controller.profile); //vista de perfil de usuario
+
+router.get('/logout',controller.logout);
 
 module.exports = router;
