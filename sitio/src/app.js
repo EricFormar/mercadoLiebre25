@@ -22,7 +22,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 app.use(methodOverride('_method')) //configuro el uso de method Override
 app.use(session({secret:"mercadoLiebreForEver"})) //configuro el uso de session
