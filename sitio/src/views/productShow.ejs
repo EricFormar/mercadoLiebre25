@@ -28,10 +28,11 @@
                                 <div class="tab-pane fade <%= showDetail %> <%= activeDetail %> " id="detalle" role="tabpanel" aria-labelledby="profile-tab">
 
                                     <div class="row p-3">
+                                        <!--
                                         <div class="col-12">
                                             <div class="row">
                                                 <div class="col-1">
-                                                    <% if (producto.id>1) { %>
+                                                    <% if (productos.indexOf(producto)>0) { %>
                                                         <a href="/products/show/<%- producto.id-1 %>/show " class="text-warning"><i class="fas fa-chevron-circle-left"></i></a>
                                                         <% } %>
                                                 </div>
@@ -41,15 +42,15 @@
                                                     </h3>
                                                 </div>
                                                 <div class="col-1">
-                                                    <% if (producto.id < total) { %>
+                                                    <% if (productos.indexOf(producto) < total) { %>
                                                         <a href="/products/show/<%- producto.id+1 %>/show " class="text-warning"><i class="fas fa-chevron-circle-right"></i></a>
 
                                                         <% } %>
                                                 </div>
                                             </div>
-
-
                                         </div>
+                                        -->
+
                                         <div class="col-12 col-md-4 mt-3">
                                             <figure class="text-center">
                                                 <img src="/images/products/<%= producto.image %> " alt="" class="img-fluid">
@@ -77,6 +78,10 @@
                                                 </div>
 
                                             </div>
+                                           
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-end ">
+                                            <a href="/users/profile"><button class="btn btn-primary mr-5" type="button">Volver</button></a>
                                         </div>
 
 

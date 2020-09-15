@@ -8,7 +8,7 @@ module.exports = [
         min:1
     })
     .withMessage("Debes ingresar tu nombre"),
-    
+
     check('apellido')
     .isLength({
         min:1
@@ -32,7 +32,7 @@ module.exports = [
 
     check('pass')
     .isLength({
-        min:6, 
+        min:6,
         max:12
     })
     .withMessage("Debes ingresar una contraseña entre 6 y 12 caracteres"),
@@ -44,5 +44,9 @@ module.exports = [
         }
         return true
     })
-    .withMessage("Las contraseñas no coinciden")
+    .withMessage("Las contraseñas no coinciden"),
+
+    check('bases')
+    .isString("on")
+    .withMessage("Debe aceptar las bases y condiciones")
 ]

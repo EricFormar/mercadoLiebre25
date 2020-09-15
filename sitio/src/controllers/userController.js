@@ -9,26 +9,32 @@ const {validationResult} = require('express-validator'); //requiero validationRe
 const bcrypt =require('bcrypt');
 const fs = require('fs');
 const path = require('path');
+const upload = require('../middlewares/upAvatares');
 
 module.exports = {
     register:function(req,res){
         res.render('userRegister',{
             title:"Registro de usuario",
-            css:"index.css",
+            css:"register.css",
             user: req.session.user
         })
     },
-    processRegister:function(req,res,next){
-        let errors = validationResult(req); //cargo los errores, si los hubiera
-        let lastID = dbUsers[(dbUsers.length)-1].id;
+    processRegister:function(req,res){
 
+        let errors = validationResult(req); //cargo los errores, si los hubiera
+        let lastID = 1;
+        dbUsers.forEach(user=>{
+            if(user.id > lastID){
+                lastID = user.id
+            }
+        })
         if(errors.isEmpty()){ //si no hay errores
             let nuevoUsuario = { //creo un objeto literal con el nuevo usuario
                 id:lastID+1,//incremento el numero del ID
                 nombre:req.body.nombre,
                 apellido:req.body.apellido,
                 email:req.body.email,
-                ciudad:req.body.ciudad!=""?req.body.ciudad:"sin especificar",
+                avatar:req.files[0].filename,
                 pass:bcrypt.hashSync(req.body.pass,10),
                 rol:"user"
             }
@@ -71,7 +77,8 @@ module.exports = {
                     req.session.user = {
                         id: user.id,
                         nick: user.nombre + " " + user.apellido,
-                        email: user.email
+                        email: user.email,
+                        avatar: user.avatar
                     }
                 }
                 if(req.body.recordar){ //si viene tildada el checkbox creo la cookie

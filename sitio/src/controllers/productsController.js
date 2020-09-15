@@ -115,6 +115,7 @@ module.exports = { //exporto un objeto literal con todos los metodos
             user: req.session.user,
             total: dbProducts.length,
             producto: resultado[0],
+            productos: dbProducts,
             categorias: dbCategories,
             //envío las variables correspondientes para ser usadas en la vista
             activeEdit:activeEdit,
