@@ -1,5 +1,7 @@
 let dbProduct = require('../data/database') //requiero la base de datos de productos
 
+let dbCategorias = require('../data/db_categories') //requiero las categorias
+
 module.exports = { //exporto un objeto literal con todos los metodos
     index: function(req, res) {
   
@@ -15,7 +17,7 @@ module.exports = { //exporto un objeto literal con todos los metodos
             css: 'index.css',
             ofertas: ofertas,
             visitas: visitas,
-            user: req.session.user
+            categorias: dbCategorias
         })
     }
 

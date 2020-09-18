@@ -20,6 +20,7 @@ router.get('/search', formSearch,controller.search); //añado una nueva ruta que
 
 router.get('/detail/:id', controller.detalle) // añado la ruta para mostrar los detalles del producto
 
+router.get('/filter/:categoria',controller.filter);
 
 router.get('/add',sessionUserCheck, controller.agregar) //añado la ruta para añadir un nuevo producto
 router.get('/add/form',controller.agregar) //añado la ruta para mostrar el formulario

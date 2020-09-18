@@ -1,6 +1,7 @@
 /************ BASES DE DATOS ************/
 
 let dbProductos = require('../data/database'); //JSON parseado de productos
+const dbCategories = require('../data/db_categories'); //requiero las categorias
 let dbUsers = require('../data/dbUsers');
 
 /*************** MODULOS ****************/
@@ -16,7 +17,7 @@ module.exports = {
         res.render('userRegister',{
             title:"Registro de usuario",
             css:"register.css",
-            user: req.session.user
+            categorias:dbCategories
         })
     },
     processRegister:function(req,res){
@@ -34,7 +35,7 @@ module.exports = {
                 nombre:req.body.nombre,
                 apellido:req.body.apellido,
                 email:req.body.email,
-                avatar:req.files[0].filename,
+                avatar:(req.files[0])?req.files[0].filename:"default.png",
                 pass:bcrypt.hashSync(req.body.pass,10),
                 rol:"user"
             }
@@ -51,9 +52,7 @@ module.exports = {
                 title: "Registro de usuario",
                 css:"index.css",
                 errors: errors.mapped(),
-                old:req.body,
-                user: req.session.user
-
+                old:req.body
             })
         }
     },
@@ -61,7 +60,8 @@ module.exports = {
         res.render('userLogin',{
             title:"Ingresá a tu cuenta",
             css:"index.css",
-            user: req.session.user
+            categorias:dbCategories
+
         })
     },
     processLogin: function(req,res){
@@ -84,15 +84,17 @@ module.exports = {
                 if(req.body.recordar){ //si viene tildada el checkbox creo la cookie
                     res.cookie('userMercadoLiebre',req.session.user, {maxAge:1000*60*5})
                 }
-                res.redirect(url)
+               
             });
+            res.locals.user = req.session.user;
+            console.log(res.locals.user)
+            res.redirect(url)
         }else{
             res.render('userLogin',{
                 title:"Ingresá a tu cuenta",
                 css:"index.css",
                 errors:errors.mapped(),
-                old:req.body,
-                user: req.session.user
+                old:req.body
             })
         }
       
@@ -104,7 +106,8 @@ module.exports = {
             productos: dbProductos.filter(producto => {
                 return producto.category != "visited" & producto.category != "in-sale"
             }),
-            user: req.session.user
+            categorias:dbCategories
+
         })
     },
     logout:function(req,res){

@@ -19,9 +19,9 @@
             </div>
 
             <div class="col-12 col-md-4 col-lg-4 d-flex justify-content-end align-items-center cuotas">
-                <a href=""><h5 class="mr-2"><%= (user)?user.nick:"Invitado" %> </h5></a>
-                <% if (user) { %>
-                    <a href=""><img src="/images/users/<%= user.avatar %> " alt="avatar" width="50px" height="50px" class="avatar"></a>
+                <a href=""><h5 class="mr-2"><%= (locals.user)?locals.user.nick:"Invitado" %> </h5></a>
+                <% if (locals.user) { %>
+                    <a href=""><img src="/images/users/<%= locals.user.avatar %> " alt="avatar" width="50px" height="50px" class="avatar"></a>
 
                 <% } else{%>
                 <a href=""><img src="/images/users/default.png" alt="" width="50px" height="50px"></a>
@@ -37,17 +37,28 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                 <ul class="menu navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Categorias
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <% categorias.forEach(categoria => { %>
+                            <li class="nav-item dropdown">
+                                
+                            </li>
+
+                            <a class="dropdown-item" href="/products/filter/<%= categoria.name %>" ><%= categoria.name %> </a>
+                          <% }) %>
+                        </div>
+                      </li>
                     <li>
-                        <a href=" ">Ofertas</a>
+                        <a class="nav-link" href=" ">Tiendas Oficiales</a>
                     </li>
                     <li>
-                        <a href=" ">Tiendas Oficiales</a>
+                        <a class="nav-link" href="/products/add">Vender</a>
                     </li>
                     <li>
-                        <a href="/products/add">Vender</a>
-                    </li>
-                    <li>
-                        <a href=" ">Ayuda</a>
+                        <a class="nav-link" href=" ">Ayuda</a>
                     </li>
                 </ul>
 
