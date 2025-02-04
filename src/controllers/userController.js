@@ -1,14 +1,13 @@
 
 module.exports = {
-    register:function(req,res){
-     
+    register: (req,res) =>{
+        return res.render('users/register')
     },
     processRegister:function(req,res){
 
-      
     },
     login:function(req,res){
-     
+        return res.render('users/login')
     },
     processLogin: function(req,res){
      

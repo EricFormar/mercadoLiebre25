@@ -1,27 +1,28 @@
-const fs = require('fs');
-const path = require('path');
+const products = require('../data/productsDataBase.json')
 
-const dbProducts = require('../data/database') //requiero la base de datos de productos
-const dbCategories = require('../data/db_categories'); //requiero las categorias
-
-const {validationResult} = require('express-validator');
-
-module.exports = { //exporto un objeto literal con todos los metodos
-    list: function(req, res) {
-      
+module.exports = { 
+    list: (req,res) => {
+        return res.render('products/products')
     },
-    detail: function(req, res) {
+    detail: (req, res) => {
 
-    },
-
-    add: function(req, res) {
+        const product = products.find(product => product.id === +req.params.id)
+        
+        return res.render('products/detail',{
+            ...product
+        })
     },
 
-    create: function(req, res, next) {
+    add: (req, res) => {
+        return res.render('products/productAdd')
     },
 
-    edit: function(req, res, next) {
-       
+    create: (req, res) => {
+
+    },
+
+    edit: (req, res ) => {
+        return res.render('products/productEdit')
     },
     update: function(req, res) {
     

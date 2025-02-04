@@ -1,14 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const { register, login } = require('../controllers/userController.js');
+const router = express.Router();
 
-
-router.get('/register', (req,res) => {
-    return res.render('register')
-});
-
-router.get('/login', (req,res) => {
-    return res.render('login')
-});
+// /users
+router
+    .get('/register', register)
+    .get('/login', login)
 
 
 
