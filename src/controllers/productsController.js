@@ -1,3 +1,4 @@
+const {toThousand} = require('../utils')
 const products = require('../data/productsDataBase.json')
 
 module.exports = { 
@@ -8,8 +9,9 @@ module.exports = {
 
         const product = products.find(product => product.id === +req.params.id)
         
-        return res.render('products/detail',{
-            ...product
+        return res.render('products/productDetail',{
+            ...product,
+            toThousand
         })
     },
 
