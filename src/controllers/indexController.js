@@ -14,5 +14,8 @@ module.exports = {
             inSale,
             toThousand
         })
+    },
+    admin : (req,res) => {
+        return res.render('admin')
     }
 }
