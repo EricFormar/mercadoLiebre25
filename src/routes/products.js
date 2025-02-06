@@ -7,8 +7,8 @@ const router = express.Router();
 router
     .get('/', list)
     .get('/detail/:id',detail)
-    .get('/add',add)
-    .post('/add',create)
+    .get('/add',add) //rendieriza el formulario
+    .post('/create',create) //recibe los datos del formulario
     .get('/edit/:id',edit)
     .put('/update/:id',update)
     .delete('/remove/:id',remove)

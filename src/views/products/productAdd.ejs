@@ -17,7 +17,7 @@
 		<div class="col-12 col-md-10 col-lg-8 mx-auto">
             <div class="card">
                 <div class="card-body">
-                    <form action="" method="" id="formAddProduct">
+                    <form action="/products/create" method="POST" id="formAddProduct" >
                         <div class="row product-detail">
                             <div class="col-12 col-md-6">
                                 <label for="name" class="form-label">Nombre del producto:</label>
@@ -34,9 +34,11 @@
                             
                             <div class="col-12 col-md-6">
                                 <label for="category" class="form-label">Categoría:</label>
-                                <select name="categoryId" id="category" class="form-control form-select-lg py-3">
+                                <select name="category" id="category" class="form-control form-select-lg py-3">
                                     <option value="" hidden selected>Elegí la categoría</option>
-                                    
+                                    <% categories.forEach(category => { %>
+                                        <option value="<%= category %>" ><%= category == "in-sale" ? 'Ofertas' : 'Ultimos agregados' %></option>
+                                    <% }) %>
                                 </select>
                             </div>
                             <div class="col-12 col-md-6">
@@ -45,7 +47,7 @@
                             </div>
                             
                             
-                            <div class="col-12">
+                            <div class="col-12 mb-3">
                                 <label for="description" class="form-label">Descripción:</label>
                                 <textarea name="description" id="description" class="form-control form-control-lg py-3" style="resize: none;" rows="5"></textarea>
                                 <p id="descriptionInfo" hidden><span id="numberCharacters"></span> disponibles</p>
