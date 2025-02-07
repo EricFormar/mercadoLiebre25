@@ -2,18 +2,21 @@ const fs = require('fs')
 const path = require('path')
 
 const {toThousand} = require('../utils')
-const products = require('../data/productsDataBase.json')
 const categories = require('../data/categories.json')
+const { readJson, saveJson } = require('../data/index.js')
 
 module.exports = { 
     list: (req,res) => {
+
+        const products = readJson('productsDataBase.json')
         return res.render('products/products',{
             products,
             toThousand
         })
     },
     detail: (req, res) => {
-
+        
+        const products = readJson('productsDataBase.json')
         const product = products.find(product => product.id === +req.params.id)
         
         return res.render('products/productDetail',{
@@ -30,6 +33,7 @@ module.exports = {
 
     create: (req, res) => {
 
+        const products = readJson('productsDataBase.json')
         const {name, price, discount, description, category} = req.body
 
         const newProduct = {
@@ -44,19 +48,57 @@ module.exports = {
 
         products.push(newProduct)
 
-        fs.writeFileSync(path.join(__dirname, '../data/productsDataBase.json'),JSON.stringify(products, null, 3),'utf-8')
+        saveJson('productsDataBase.json',products)
 
         return res.redirect('/products/detail/' + newProduct.id)
     },
 
     edit: (req, res ) => {
-        return res.render('products/productEdit')
+        
+        const {id} = req.params
+        const products = readJson('productsDataBase.json')
+        const categories = readJson('categories.json')
+
+        const product = products.find(product => product.id === +id)
+
+        return res.render('products/productEdit',{
+            categories,
+            ...product
+        })
     },
     update: function(req, res) {
+
+        const products = readJson('productsDataBase.json')
+
+        const {name, price, discount, description, category} = req.body
+        
+        const productsModify = products.map(product => {
+            if(product.id === +req.params.id){
+                product.name = name.trim();
+                product.price = +price;
+                product.discount = +discount;
+                product.description = description.trim();
+                product.category = category;
+            }
+            return product
+        })
+
+        saveJson('productsDataBase.json',productsModify)
+
+        return res.redirect('/admin')
     
     },
     remove: function(req,res){
-     
+        
+        const products = readJson('productsDataBase.json');
+        const {id} = req.params;
+
+        const productsModify = products.filter(product => product.id !== +id)
+
+        saveJson('productsDataBase.json',productsModify)
+
+        return res.redirect('/admin')
+
     },
 
     search: function(req, res) {

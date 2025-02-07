@@ -64,12 +64,11 @@
   },
   {
     "id": 8,
-    "name": "Apple iPhone 11 Pro Dual SIM 256 GB",
+    "name": "Apple iPhone 14 Pro Dual SIM 256 GB",
     "description": "¡El nuevo smartphone que lo tiene todo! Con este lanzamiento, Apple ha superado todos sus récords. Su diseño se destaca por sus líneas finas y distinguidas a partir de una sola hoja de vidrio resistente, combinada con aluminio de excelente calidad.",
     "price": 148000,
     "discount": 2,
-    "image": "img-iphone-11.jpg",
-    "category": "in-sale"
+    "image": "img-iphone-11.jpg"
   },
   {
     "id": 9,
@@ -142,13 +141,5 @@
     "category": "in-sale",
     "description": "Deja que la música dance cobre vida con EXTRA BASS™ Anima el ambiente con EXTRA BASS™1. Un radiador pasivo trabaja con el parlante monoaural para potenciar los tonos bajos y mejorar los graves, a pesar del tamaño compacto. ",
     "image": "img-parlante-sony.jpg"
-  },
-  {
-    "id": 17,
-    "name": "Nuevo producto 3",
-    "description": "una buena descripción (crucen los dedos)",
-    "price": 10000,
-    "discount": 5,
-    "image": "default-image.png"
   }
 ]
