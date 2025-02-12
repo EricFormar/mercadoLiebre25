@@ -9,7 +9,7 @@ module.exports = {
     list: (req,res) => {
 
         const products = readJson('productsDataBase.json')
-        return res.render('products/products',{
+        return res.render('products/productsList',{
             products,
             toThousand
         })
@@ -21,6 +21,7 @@ module.exports = {
         
         return res.render('products/productDetail',{
             ...product,
+            admin : req.query.admin,
             toThousand
         })
     },

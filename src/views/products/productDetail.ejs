@@ -4,7 +4,9 @@
 <%- include('../partials/head', {title: 'Detalle del producto'}) %>
 <body>
 	<!-- Header -->
-	<%- include('../partials/header') %>
+	 <% if (!locals.admin) { %>
+		<%- include('../partials/header') %>
+	 <% } %>
 	<!-- /Header -->
 
 	<!-- product detail -->
@@ -53,12 +55,6 @@
 						</ul>
 
 						<a href="#" class="buy-now-button">COMPRAR AHORA</a>
-						<hr>
-
-						<a href="/products/edit/<%= id %>" class="action-button edit">EDITAR PRODUCTO</a>
-						<form action="/products/delete/<%= id %>?_method=DELETE" method="POST" style="display: inline-flex">
-							<button type="submit" style="cursor: pointer;" class="action-button delete">ELIMINAR</button>
-						</form>
 					</article>
 				</div>
 			</div>
@@ -67,7 +63,9 @@
 	<!-- /product detail -->
 
 	<!-- footer -->
-	<%- include('../partials/footer') %>
+	<% if (!locals.admin) { %>
+		<%- include('../partials/footer') %>
+	<% } %>
 	<!-- /footer -->
 
 </body>	

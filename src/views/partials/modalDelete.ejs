@@ -1,14 +1,18 @@
   <div class="modal fade" id="modalDelete<%= id %>" tabindex="-1" aria-labelledby="modalDelete<%= id %>Label" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 d-flex gap-2 align-items-center" id="showDetail<%= id %>Label">
+            <span class="fs-2 text-danger"><i class="fas fa-exclamation-circle"></i></span> 
+            Advertencia</h1>
+        </div>
         <div class="modal-body">
-          <p class="fs-4">Advertencia</p>
           <p>¿En serio querés borrar el producto <b><%= name %></b>?</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
           <form action="/products/remove/<%= id %>?_method=DELETE" method="POST">
-            <button class="btn btn-danger" type="submit">Borrar</button>
+            <button class="btn btn-danger" type="submit">Sí, borralo</button>
         </form>
         </div>
       </div>

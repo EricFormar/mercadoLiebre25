@@ -3,107 +3,221 @@
 <!-- Include Head -->
 <%- include('partials/headAdmin', {title: 'Administrator' }) %>
 
-	<body style="background-color: snow;">
-		<!-- Header -->
+	<body>
 		<%- include('partials/headerAdmin') %>
-			<!-- /Header -->
 
-			<div class="container my-3 bg-light">
-				<div class="row">
-					<div class="col-12">
-						<div class="d-flex justify-content-between align-items-center">
-							<h2 class="products-title">Productos</h2>
-							<a class="btn btn-outline-dark" href="/products/add"><i class="fa fa-plus"></i> Nuevo
-								producto</a>
-						</div>
-						<hr>
-					</div>
-				</div>
+			<div class="container">
 
-				<div class="col-12">
+				<!-- Content Wrapper -->
+				<div id="content-wrapper" class="d-flex flex-column">
 
-					<div class="card">
-						<div class="card-header d-flex justify-content-between">
+					<!-- Main Content -->
+					<div id="content">
 
-							<form class="d-flex" role="search">
-								<input class="form-control me-2" type="search" placeholder="Escriba..."
-									aria-label="Search">
-								<button class="btn btn-outline-dark" style="width: 125px;" type="submit"><i
-										class="fa fa-search"></i> Buscar</button>
-							</form>
-							<form class="d-flex" role="search">
-								<select class="form-select me-2">
-									<option value="">Seleccione...</option>
-								</select>
-								<button class="btn btn-outline-dark" style="width: 145px;" type="submit"><i
-										class="fa fa-filter"></i> Filtrar</button>
-							</form>
-						</div>
-						<div class="card-body">
-							<table class="table">
-								<thead>
-									<tr>
-										<th scope="col">#</th>
-										<th scope="col">Producto</th>
-										<th scope="col">Precio</th>
-										<th scope="col">Descuento</th>
-										<th scope="col">Categoría</th>
-										<th scope="col">Acciones</th>
-									</tr>
-								</thead>
-								<tbody>
-									<% products.forEach(({id, name, price, discount, category})=> { %>
-										<tr>
-											<th scope="row">
-												<%= id %>
-											</th>
-											<td>
-												<%= name %>
-											</td>
-											<td>
-												<%= price %>
-											</td>
-											<td>
-												<%= discount %>
-											</td>
-											<td>
-												<%= category=="in-sale" ? 'Ofertas' : 'Ultimos agregados' %>
-											</td>
-											<td>
-												<div class="d-flex gap-2">
-													<a href="/products/edit/<%= id %>"
-														class="btn btn-sm btn-success">Editar</a>
+						<!-- Content Row Top -->
+						<div class="container-fluid">
+							<div class="row mb-4">
+								<div class="col-12">
+									<div class="d-flex justify-content-between align-items-center">
+										<h2 class="products-title">Panel de Administración</h2>
+									</div>
+								</div>
+							</div>
+							<!-- Content Row Movies-->
+							<div class="row">
+								<div class="col-md-4 mb-4">
+									<div class="card border-left-primary shadow h-100 py-2">
+										<div class="card-body">
+											<div class="row no-gutters align-items-center">
+												<div class="col mr-2">
+													<div
+														class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+														Productos</div>
+													<div class="h5 mb-0 font-weight-bold text-gray-800">21</div>
+												</div>
+												<div class="col-auto">
+													<i class="fas fa-shopping-bag fa-2x text-gray-300"></i>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 mb-4">
+									<div class="card border-left-success shadow h-100 py-2">
+										<div class="card-body">
+											<div class="row no-gutters align-items-center">
+												<div class="col mr-2">
+													<div
+														class="text-xs font-weight-bold text-success text-uppercase mb-1">
+														Favoritos</div>
+													<div class="h5 mb-0 font-weight-bold text-gray-800">79</div>
+												</div>
+												<div class="col-auto">
+													<i class="fas fa-thumbs-up fa-2x text-gray-300"></i>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 
-													<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-														data-bs-target="#modalDelete<%= id %>">
-														Borrar
-													</button>
-													<%- include('./partials/modalDelete',{
-														id,
-														name,
-													}) %>
+								<!-- Actors quantity -->
+								<div class="col-md-4 mb-4">
+									<div class="card border-left-warning shadow h-100 py-2">
+										<div class="card-body">
+											<div class="row no-gutters align-items-center">
+												<div class="col mr-2">
+													<div
+														class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+														Usuarios
+													</div>
+													<div class="h5 mb-0 font-weight-bold text-gray-800">49</div>
+												</div>
+												<div class="col-auto">
+													<i class="fas fa-users fa-2x text-gray-300"></i>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End movies in Data Base -->
 
+
+							<!-- Content Row Last Movie in Data Base -->
+							<div class="row">
+								<!-- Last Movie in DB -->
+								<div class="col-lg-6 mb-4">
+									<div class="card shadow mb-4">
+										<div class="card-header py-3">
+											<h5 class="m-0 font-weight-bold text-gray-800">Último producto agregado</h5>
+										</div>
+										<div class="card-body">
+											<div class="text-center">
+												<img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 40rem;"
+													src="/images/products/img-parlante-sony.jpg"
+													alt=" Star Wars - Mandalorian ">
+											</div>
+											<h4>Sony Srs-xb12 Parlante Bluetooth Portátil</h4>
+											<p>Deja que la música dance cobre vida con EXTRA BASS™ Anima el ambiente con
+												EXTRA BASS™1. Un radiador pasivo trabaja con el parlante monoaural para
+												potenciar los tonos bajos y mejorar los graves, a pesar del tamaño
+												compacto. </p>
+										</div>
+									</div>
+								</div>
+								<!-- End content row last movie in Data Base -->
+
+								<!-- Genres in DB -->
+								<div class="col-lg-6 mb-4">
+									<div class="card shadow mb-4">
+										<div class="card-header py-3">
+											<h5 class="m-0 font-weight-bold text-gray-800">Categorías</h5>
+										</div>
+										<div class="card-body">
+											<div class="row">
+												<div class="col-lg-6 mb-4">
+													<div class="card bg-dark text-white shadow">
+														<div class="card-body">
+															Computación
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-6 mb-4">
+													<div class="card bg-dark text-white shadow">
+														<div class="card-body">
+															Hogar y muebles
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-6 mb-4">
+													<div class="card bg-dark text-white shadow">
+														<div class="card-body">
+															Herramientas
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-6 mb-4">
+													<div class="card bg-dark text-white shadow">
+														<div class="card-body">
+															Audio y sonido
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-6 mb-4">
+													<div class="card bg-dark text-white shadow">
+														<div class="card-body">
+															Celulares
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-6 mb-4">
+													<div class="card bg-dark text-white shadow">
+														<div class="card-body">
+															Electrodomésticos
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-6 mb-4">
+													<div class="card bg-dark text-white shadow">
+														<div class="card-body">
+															Cuidado personal
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-6 mb-4">
+													<div class="card bg-dark text-white shadow">
+														<div class="card-body">
+															Juguetería
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-6 mb-4">
+													<div class="card bg-dark text-white shadow">
+														<div class="card-body">
+															Indumentaria
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-6 mb-4">
+													<div class="card bg-dark text-white shadow">
+														<div class="card-body">
+															Deportes
+														</div>
+													</div>
 												</div>
 
-											</td>
-										</tr>
-										<% }) %>
-
-
-								</tbody>
-							</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
+						<!--End Content Row Top-->
 					</div>
+					<!-- End of MainContent -->
+
+					<!-- Footer -->
+					<footer class="sticky-footer bg-white">
+						<div class="container my-auto">
+							<div class="copyright text-center my-auto">
+								<span>Copyright &copy; Formar | Comisión 25</span>
+							</div>
+						</div>
+					</footer>
+					<!-- End of Footer -->
 
 				</div>
+				<!-- End of Content Wrapper -->
 
 			</div>
-			<!-- /todos los productos -->
+			<!-- End of Page Wrapper -->
+
+	</body>
 
 
-			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-				integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-				crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"></script>
 
 	</body>
 
