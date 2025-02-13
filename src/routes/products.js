@@ -1,5 +1,6 @@
 const express = require('express');
-const { list, detail, add, create, edit, update, remove, search} = require('../controllers/productsController.js');
+const { list, detail, add, create, edit, update, remove, search, showCart} = require('../controllers/productsController.js');
+const userSessionCheck = require('../middlewares/userSessionCheck.js');
 const router = express.Router();
 
 // /products
@@ -13,5 +14,6 @@ router
     .put('/update/:id',update)
     .delete('/remove/:id',remove)
     .get('/search',search)
+    .get('/cart',userSessionCheck, showCart)
 
 module.exports = router;

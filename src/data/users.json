@@ -1,35 +1,46 @@
 [
   {
-    "id": 1,
+    "id": "1",
     "name": "Admin",
     "surname": "MercadoLiebre",
     "email": "admin@ml.com",
-    "password": "",
-    "token" : null,
-    "validate" : true,
-    "lock" : false,
+    "password": "$2b$10$JC/h8GORA64DWjcVD96EAeYEFNWCmj19mU2xgwPbfX5ugoazpUsky",
+    "token": null,
+    "validate": true,
+    "lock": false,
     "rol": "admin"
   },
   {
-    "id": 2,
+    "id": "2",
     "name": "User",
     "surname": "MercadoLiebre",
     "email": "user@ml.com",
-    "password": "",
-    "token" : null,
-    "validate" : true,
-    "lock" : false,
+    "password": "$2b$10$JC/h8GORA64DWjcVD96EAeYEFNWCmj19mU2xgwPbfX5ugoazpUsky",
+    "token": null,
+    "validate": true,
+    "lock": false,
     "rol": "user"
   },
   {
-    "id": 4,
+    "id": "4",
     "name": "Locked",
     "surname": "MercadoLiebre",
     "email": "locked@ml.com",
-    "password": "",
-    "token" : null,
-    "validate" : true,
-    "lock" : true,
+    "password": "$2b$10$JC/h8GORA64DWjcVD96EAeYEFNWCmj19mU2xgwPbfX5ugoazpUsky",
+    "token": null,
+    "validate": true,
+    "lock": true,
+    "rol": "user"
+  },
+  {
+    "id": "93ef28a7-5d8d-4eac-b4b3-abdfbf2de45b",
+    "name": "Eric",
+    "surname": "Mena",
+    "email": "eric@ml.com",
+    "password": "$2b$10$JC/h8GORA64DWjcVD96EAeYEFNWCmj19mU2xgwPbfX5ugoazpUsky",
+    "token": null,
+    "validate": true,
+    "lock": false,
     "rol": "user"
   }
 ]

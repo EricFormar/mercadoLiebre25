@@ -19,7 +19,7 @@
                                 <img src="/images/logo-mercado-liebre.svg" alt="">
                             </div>
                             <div class="col-12 col-md-8 p-5">
-                                <form action="/users/login" method="POST" id="form-login">
+                                <form action="/users/processLogin" method="POST" id="form-login">
                                     <div class="row product-detail">
 
                                         <div class="col-12 col-md-6">
@@ -33,12 +33,12 @@
 
                                         </div>
                                         <div class="col-12 col-md-6">
-                                            <label for="pass" class="form-label">Contraseña</label>
+                                            <label for="password" class="form-label">Contraseña</label>
                                             <input type="password"
                                                 class="form-input form-control"
-                                                id="pass" name="pass">
-                                            <small class="text-danger" id="error-pass">
-                                                <%= locals.errors && errors.pass ? errors.pass.msg : null %>
+                                                id="password" name="password">
+                                            <small class="text-danger" id="error-password">
+                                                <%= locals.errors && errors.password ? errors.password.msg : null %>
                                             </small>
 
                                         </div>
@@ -50,6 +50,15 @@
                                                     for="exampleCheck1">Recordarme</label>
                                             </div>
                                         </div>
+                                        <div class="col-12">
+                                            <% if (locals.error) { %>
+                                                <div class="alert alert-danger">
+                                                    <%= error %>
+                                                </div>
+                                            <% } %>
+                                        </div>
+                                    
+                                      
 
                                         <div class="col-12 col-md-6">
                                             <button type="submit" class="buy-now-button">Iniciar sesión</button>

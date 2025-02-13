@@ -3,6 +3,10 @@ const {toThousand, paginator} = require('../utils')
 
 module.exports = {
     index : (req,res) => {
+        console.log({
+            userLogin : req.session.userLogin
+        });
+        
         const products = readJson('productsDataBase.json')
 
         let inSale = products.filter(producto => {

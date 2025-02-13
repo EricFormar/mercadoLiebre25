@@ -105,5 +105,6 @@ module.exports = {
     search: function(req, res) {
   
     },
+    showCart : (req,res) => res.render('products/productCart')
 
 }
