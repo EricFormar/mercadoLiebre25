@@ -364,13 +364,14 @@ hr {
 .action-button {
   border: none;
   border-radius: 8px;
-  font-size: 1.2em;
+  font-size: 1.6em;
   color: #ffffff;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: 15px 30px;
-  margin-top: 15px;
+  padding: 15px;
+  margin-bottom: 15px;
+
 }
 
 .action-button.edit {

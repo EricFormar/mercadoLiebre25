@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head') %>
+
+    <body>
+        <%- include('../partials/header') %>
+            <div class="container products-wrapper">
+                <div class="row">
+                    <div class="col-12">
+
+                        <h2 class="products-title">Mi Perfil</h2>
+                    </div>
+                    <div class="col-12 p-4">
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            <div class="row product-detail">
+                                <div class="col-12 col-md-4 gap-3 p-3 d-flex flex-column align-items-center">
+                                    <img src="/images/users/default.png" id="imgAvatar" class="img-fluid" alt="avatar"
+                                        style="width: 80%; object-fit: cover; object-position: top;">
+
+                                    <div class="form-group w-75">
+                                        <input type="file" class="form-control" id="avatarImput" name="avatar">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-8 ">
+                                    <div class="row">
+                                        <div class="form-group col-12 col-md-6 ">
+                                            <label for="inputNombre" class="form-label">Nombre</label>
+                                            <input type="text" name="nombre" class="form-input form-control"
+                                                id="inputNombre" value="" disabled>
+                                        </div>
+                                        <div class="form-group col-12 col-md-6">
+                                            <label for="inputApellido" class="form-label">Apellido</label>
+                                            <input type="text" name="apellido" class="form-input form-control"
+                                                id="inputApellido" value="" disabled>
+                                        </div>
+                                        <div class="form-group col-12 col-md-6">
+                                            <label for="imputEmail" class="form-label">Email</label>
+                                            <input type="email" name="email" class="form-input form-control"
+                                                id="imputEmail" value="" disabled>
+                                        </div>
+                                        <div class="form-group col-12 col-md-6">
+                                            <label for="imputEmail" class="form-label">Fecha de nacimiento</label>
+                                            <input type="date" name="fecha" class="form-input form-control"
+                                                id="imputEmail" value="">
+                                        </div>
+                                        <div class="form-group col-12">
+                                            <label for="inputAddress2" class="form-label">Dirección</label>
+                                            <input type="text" name="direccion" class="form-input form-control"
+                                                id="inputAddress2" value="">
+                                        </div>
+                                        <div class="form-group col-12 col-md-6">
+                                            <label for="imputCiudad" class="form-label">Ciudad</label>
+                                            <input type="text" name="ciudad" class="form-input form-control"
+                                                id="inputCiudad" value="">
+
+                                        </div>
+                                        <div class="form-group col-12 col-md-6">
+                                            <label for="inputProvincia" class="form-label">Provincia</label>
+                                            <input type="text" name="provincia" class="form-input form-control"
+                                                id="inputProvincia" value="">
+                                        </div>
+                                    </div>
+                                    <div class="d-md-flex justify-content-end gap-2">
+                                        <button type="button" class="action-button edit"><a href="/"
+                                                class="text-light">Salir sin
+                                                guardar</a></button>
+                                        <button type="submit" class="buy-now-button">Actualizar datos</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="col-12 col-md-4 d-flex justify-content-center">
+                            <form action="" method="POST">
+                                <button type="submit" class="btn-sm btn-danger">Darse de baja</button>
+                            </form>
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane fade  " id="productos" role="tabpanel" aria-labelledby="profile-tab">
+
+                        <div class="row productos p-4">
+
+                            <div class="col-12">
+                                <img src="/images/enConstruccion.png" alt="" class="w-50">
+                            </div>
+
+                        </div>
+                        <!--finaliza el row-->
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+            </div>
+
+            <%- include('../partials/footer') %>
+
+    </body>
+
+</html>

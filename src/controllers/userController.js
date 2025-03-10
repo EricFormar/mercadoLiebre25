@@ -52,7 +52,9 @@ module.exports = {
 
     return res.redirect('/')
   },
-  profile: (req, res) => {},
+  profile: (req, res) => {
+    return res.render('users/profile')
+  },
   update: (req, res) => {},
   logout: (req, res) => {},
 };
