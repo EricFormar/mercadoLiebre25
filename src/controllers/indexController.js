@@ -1,25 +1,40 @@
 const { readJson } = require('../data/index.js')
+
+const db = require('../database/models')
 const {toThousand, paginator} = require('../utils')
 
 module.exports = {
-    index : (req,res) => {
-        console.log({
-            userLogin : req.session.userLogin
-        });
-        
-        const products = readJson('productsDataBase.json')
+    index : async (req,res) => {
+      
+        try {
 
-        let inSale = products.filter(producto => {
-            return producto.category == "in-sale"
-        })
-        let newest = products.filter(producto => {
-            return producto.category == "visited"
-        })
-        res.render('home', { 
-            newest,
-            inSale,
-            toThousand
-        })
+            const inSale = await db.Section.findByPk(1,{
+                include : [
+                    {
+                        association : 'products',
+                        include : ['images']
+                    }
+                ]
+            });
+
+            const newest = await db.Section.findByPk(2,{
+                include : [
+                    {
+                        association : 'products',
+                        include : ['images']
+                    }
+                ]
+            })
+
+            return res.render('home', { 
+                newest,
+                inSale,
+                toThousand
+            })
+        } catch (error) {
+            console.log(error);
+        }
+       
     },
     admin : (req,res) => {
         return res.render('admin')

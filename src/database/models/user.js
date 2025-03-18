@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     image: DataTypes.STRING,
     token: DataTypes.STRING,
-    validate: DataTypes.BOOLEAN,
+    validated: DataTypes.BOOLEAN,
     lock: DataTypes.BOOLEAN,
     rolId: DataTypes.INTEGER
   }, {

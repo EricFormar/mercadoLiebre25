@@ -15,12 +15,12 @@
 	<div class="container products-wrapper">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="products-title">Últimos agregados</h2>
+				<h2 class="products-title"><%= newest.name %></h2>
 			</div>
 			<!-- Show the "visited" products -->
-			<% newest.forEach((product) => { %>
+			<% newest.products.forEach((product) => { %>
 				<%- include('./partials/productCard',{
-					...product
+					...product.dataValues
 				}) %>
 			
 		   <% }) %>
@@ -33,12 +33,12 @@
 	<div class="container products-wrapper">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="products-title">Ofertas</h2>
+				<h2 class="products-title"><%= inSale.name %></h2>
 			</div>
 			<!-- Show the "in-sale" products -->
-			<% inSale.forEach((product) => { %>
+			<% inSale.products.forEach((product) => { %>
 				<%- include('./partials/productCard',{
-					...product
+					...product.dataValues
 				}) %>
 				
 			   <% }) %>

@@ -31,7 +31,7 @@ module.exports = {
       token: {
         type: Sequelize.STRING(20)
       },
-      validate: {
+      validated: {
         type: Sequelize.BOOLEAN,
         defaultValue : false
       },
