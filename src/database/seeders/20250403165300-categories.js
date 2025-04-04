@@ -1,5 +1,5 @@
 'use strict';
-const categoriesJSON = require('../data/categoriesExtreme.json');
+const categoriesJSON = require('../../data/categoriesExtreme.json');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {

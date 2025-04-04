@@ -1,5 +1,5 @@
 'use strict';
-const categoriesJSON = require('../data/categoriesExtreme.json');
+const categoriesJSON = require('../../data/categoriesExtreme.json');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -17,10 +17,10 @@ module.exports = {
       // Find the corresponding category ID
       const dbCategory = categories.find(c => c.name === category.name);
       
-      if (dbCategory && category.subcategories) {
-        category.subcategories.forEach(subcategory => {
+      if (dbCategory && category.sub) {
+        category.sub.forEach(subcategory => {
           subcategories.push({
-            name: subcategory.name,
+            name: subcategory,
             categoryId: dbCategory.id,
             createdAt: new Date(),
             updatedAt: new Date()

@@ -1,0 +1,46 @@
+[
+    {
+        "id": 1,
+        "name": "Moulinex"
+    },
+    {
+        "id": 2,
+        "name": "Apple"
+    },
+    {
+        "id": 3,
+        "name": "Samsung"
+    },
+    {
+        "id": 4,
+        "name": "Whirlpool"
+    },
+    {
+        "id": 5,  
+        "name": "Nikon"
+    },
+    {
+        "id": 6,
+        "name": "TCL"
+    },
+    {
+        "id": 7,
+        "name": "Lenovo"
+    },
+    {
+        "id": 8,
+        "name": "Logitech"
+    },
+    {
+        "id": 9,
+        "name": "Soundtouch"
+    },
+    {
+        "id": 10,
+        "name": "Fierce"
+    },
+    {
+        "id": 11,
+        "name": "Sony"
+    }
+]

@@ -4,30 +4,33 @@
     "name": "Cafetera Moulinex Dolce Gusto Edited",
     "price": 50000,
     "discount": 50,
-    "category": "visited",
+    "category": "Hogar - Muebles - Jardín",
     "subcategory" : "Electrodomésticos",
     "description": "Cafetera Dolce Gusto Lumio. La cafetera Dolce Gusto Lumio es de variedad automática que ha llegado con un diseño radical al que nos tenía acostumbrados Dolce Gusto.En este post te contamos todo lo que necesitas saber sobre ella, desde sus características técnicas hasta la calidad de las cápsulas o price.",
-    "image": "img-cafetera-moulinex.jpg"
+    "image": "img-cafetera-moulinex.jpg",
+    "section" : "in-sale"
   },
   {
     "id": 2,
-    "name": "Macbook Pro 2022",
+    "name": "Apple Macbook Pro 2022",
     "price": 200000,
     "discount": 3,
-    "category": "in-sale",
+    "category": "Electrónica",
     "subcategory" : "Notebooks",
     "description": "Macbook Pro 2019 Mpxq2ll/a Intel Core i5 2.3 Ghz 8gb RAM 128gb SSD Pantalla 13.3\" Retina Apple Nueva Original. Importada de USA. Se entrega con la factura de compra para contar con la garantía del fabricante",
-    "image": "img-macbook-pro-2019.jpg"
+    "image": "img-macbook-pro-2019.jpg",
+    "section" : "in-sale"
   },
   {
     "id": 3,
     "name": "Samsung Galaxy S10",
     "price": 72999,
     "discount": 25,
-    "category": "in-sale",
+    "category": "Electrónica",
     "subcategory" : "Celulares - Teléfonos",
     "description": "Experiencia visual excepcional. Mirá tus series y películas favoritas con la mejor definición.Tendrás colores brillantes y detalles precisos en todos tus contenidos.Disfrutá aún más del mejor entretenimiento gracias a su vasta pantalla y ángulos de visión amplios.",
-    "image": "img-samsung-galaxy-s10.jpg"
+    "image": "img-samsung-galaxy-s10.jpg",
+    "section" : "visited"
   },
   {
     "id": 4,
@@ -36,8 +39,9 @@
     "price": 47900,
     "discount": 10,
     "image": "img-heladera-whirpool.jpg",
-    "category": "in-sale",
-    "subcategory" : "Electrodomésticos"
+    "category": "Hogar - Muebles - Jardín",
+    "subcategory" : "Electrodomésticos",
+    "section" : "in-sale"
   },
   {
     "id": 5,
@@ -46,18 +50,20 @@
     "price": 53000,
     "discount": 20,
     "image": "img-camara-nikon.jpg",
-    "category": "in-sale",
-    "subcategory" : "Camaras"
+    "category": "Electrónica",
+    "subcategory" : "Camaras",
+    "section" : "visited"
   },
   {
     "id": 6,
-    "name": "Aire Acondicionado 3200w Frio / Calor",
+    "name": "Aire Acondicionado TCL 3200w Frio / Calor",
     "description": "AIRE SPLIT 3200W TACA-3200WCHSA/KC FC TCL. Capacidad frio 3200 Watts. Capacidad calor 3300 Watts. Potencia Electrica(W)frio 996. Potencia Electrica(W)calor 1028. Eficiencia energética calor C. Eficiencia energética frio A. Frigorias 2750 UNIDAD INTERIOR. Peso Bruto 10kg. Peso Neto 7 kg",
     "price": 20999,
     "discount": 12,
     "image": "img-aire-acondicionado.jpg",
-    "category": "in-sale",
-    "subcategory" : "Electrodomésticos"
+    "category": "Hogar - Muebles - Jardín",
+    "subcategory" : "Electrodomésticos",
+    "section" : "in-sale"
   },
   {
     "id": 7,
@@ -66,8 +72,9 @@
     "price": 36700,
     "discount": 5,
     "image": "img-laptop-lenovo.jpg",
-    "category": "in-sale",
-    "subcategory" : "Notebooks"
+    "category": "Electrónica",
+    "subcategory" : "Notebooks",
+    "section" : "visited"
   },
   {
     "id": 8,
@@ -76,7 +83,9 @@
     "price": 148000,
     "discount": 2,
     "image": "img-iphone-11.jpg",
-    "subcategory" : "Celulares - Teléfonos"
+    "subcategory" : "Celulares - Teléfonos",
+    "category": "Teléfonos - Tablets",
+    "section" : "in-sale"
   },
   {
     "id": 9,
@@ -85,8 +94,9 @@
     "price": 11399,
     "discount": 0,
     "image": "img-apple-magic-keyboard.jpg",
-    "category": "visited",
-    "subcategory" : "Computadoras de Escritorio"
+    "category": "Electrónica",
+    "subcategory" : "Computadoras de Escritorio",
+    "section" : "visited"
   },
   {
     "id": 10,
@@ -95,8 +105,9 @@
     "price": 1200,
     "discount": 10,
     "image": "img-mouse-logitech.jpg",
-    "category": "visited",
-    "subcategory" : "Computadoras de Escritorio"
+    "category": "Electrónica",
+    "subcategory" : "Computadoras de Escritorio",
+    "section" : "in-sale"
   },
   {
     "id": 11,
@@ -105,8 +116,9 @@
     "price": 29990,
     "discount": 12,
     "image": "img-parlante-bose.jpg",
-    "category": "visited",
-    "subcategory" : "Audio"
+    "category": "Electrónica",
+    "subcategory" : "Audio",
+    "section" : "visited"
   },
   {
     "id": 12,
@@ -115,8 +127,9 @@
     "price": 32990,
     "discount": 0,
     "image": "img-home-theater-sony.jpg",
-    "category": "visited",
-    "subcategory" : "Audio"
+    "category": "Electrónica",
+    "subcategory" : "Audio",
+    "section" : "in-sale"
   },
   {
     "id": 13,
@@ -125,8 +138,9 @@
     "price": 34990,
     "discount": 0,
     "image": "img-tv-samsung-smart.jpg",
-    "category": "visited",
-    "subcategory" : "TV"
+    "category": "Electrónica",
+    "subcategory" : "TV",
+    "section" : "visited"
   },
   {
     "id": 14,
@@ -136,7 +150,8 @@
     "discount": 5,
     "image": "img-sony-blueray.jpg",
     "category": "Electrónica",
-    "subcategory" : "Audio"
+    "subcategory" : "Audio",
+     "section" : "visited"
   },
   {
     "id": 15,
@@ -146,7 +161,8 @@
     "discount": 12,
     "image": "img-bicicleta-fierce.jpg",
     "category": "Deportes - Bicicletas",
-    "subcategory" : "Bicicletas - Ciclismo"
+    "subcategory" : "Bicicletas - Ciclismo",
+    "section" : "in-sale"
   },
   {
     "id": 16,
@@ -156,6 +172,7 @@
     "category": "Electrónica",
     "subcategory" : "Audio",
     "description": "Deja que la música dance cobre vida con EXTRA BASS™ Anima el ambiente con EXTRA BASS™1. Un radiador pasivo trabaja con el parlante monoaural para potenciar los tonos bajos y mejorar los graves, a pesar del tamaño compacto. ",
-    "image": "img-parlante-sony.jpg"
+    "image": "img-parlante-sony.jpg",
+    "section" : "visited"
   }
 ]
