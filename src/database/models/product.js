@@ -11,6 +11,40 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Product.belongsTo(models.Section, {
+        foreignKey: 'sectionId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        as: "section",
+      });
+
+      Product.belongsTo(models.Category, {
+        foreignKey:'categoryId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        as: "category",
+      });
+
+      Product.belongsTo(models.Brand, {
+        foreignKey:'brandId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        as: "brand",
+      });
+
+      Product.belongsTo(models.Subcategory, {
+        foreignKey:'subcategoryId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        as: "subcategory",
+      });
+
+      Product.hasMany(models.Image, {
+        foreignKey:'productId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        as: "images",
+      });
     }
   }
   Product.init({

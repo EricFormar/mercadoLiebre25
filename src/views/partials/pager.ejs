@@ -2,7 +2,7 @@
   <ul class="pagination">
     <% if (currentPage > 1) { %>
       <li class="page-item">
-        <a class="page-link" href="<%= path %>?page=1" aria-label="Previous">
+        <a class="page-link" href="<%= path %>?page=1&category=<%= filterCategory %>" aria-label="Previous">
           <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
@@ -10,16 +10,15 @@
    
     <% for( let page=1; page <=totalPages; page++ ) { %>
     <li class="page-item <%= page == currentPage && 'active' %>">
-      <a class="page-link" href="<%= path %>?page=<%= page %>"> <%= page %> </a>
+      <a class="page-link" href="<%= path %>?page=<%= page %>&category=<%= filterCategory %>"> <%= page %> </a>
     </li>
     <% } %>
     <% if (currentPage < totalPages) { %>
       <li class="page-item">
-        <a class="page-link" href="<%= path %>?page=<%= totalPages %>" aria-label="Next">
+        <a class="page-link" href="<%= path %>?page=<%= totalPages %>&category=<%= filterCategory %>" aria-label="Next">
           <span aria-hidden="true">&raquo;</span>
         </a>
       </li>
     <% } %>
-   
   </ul>
 </nav>

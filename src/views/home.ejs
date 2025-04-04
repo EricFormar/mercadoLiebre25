@@ -20,7 +20,7 @@
 			<!-- Show the "visited" products -->
 			<% newest.forEach((product) => { %>
 				<%- include('./partials/productCard',{
-					...product
+					...product.dataValues
 				}) %>
 			
 		   <% }) %>
@@ -38,7 +38,7 @@
 			<!-- Show the "in-sale" products -->
 			<% inSale.forEach((product) => { %>
 				<%- include('./partials/productCard',{
-					...product
+					...product.dataValues
 				}) %>
 				
 			   <% }) %>

@@ -41,7 +41,7 @@
     },
     {
         "id": "4",
-        "name": "Teléfonos - Tablets",
+        "name": "Telefonía",
         "sub": [
             "Celulares - Teléfonos",
             "Accesorios para celulares",
@@ -50,7 +50,7 @@
     },
     {
         "id": "5",
-        "name": "Hogar - Muebles - Jardín",
+        "name": "Hogar",
         "sub": [
             "Muebles",
             "Decoración - Jardín - Accesorios",
@@ -59,7 +59,7 @@
     },
     {
         "id": "6",
-        "name": "Deportes - Bicicletas",
+        "name": "Aire Libre",
         "sub": [
             "Bicicletas - Ciclismo",
             "Otros Deportes",

@@ -34,7 +34,7 @@
 										<select class="form-select me-2" name="category">
 											<option value="" <%= !filterCategory && 'selected' %>>Todos los productos</option>
 											<% categories.forEach(category => { %>
-											 <option value="<%= category %>" <%= filterCategory == category && 'selected' %>><%= category=="in-sale" ? 'Ofertas' : 'Ultimos agregados' %></option>
+											 <option value="<%= category.id %>" <%= filterCategory == category.id && 'selected' %>><%= category.name %></option>
 											<% }) %>
 										</select>
 										<button class="btn btn-outline-dark" type="submit"><i
@@ -55,7 +55,9 @@
 										<th scope="col">Producto</th>
 										<th scope="col">Precio</th>
 										<th scope="col">Descuento</th>
+										<th scope="col">Marca</th>
 										<th scope="col">Categoría</th>
+										<th scope="col">Subcategoría</th>
 										<th scope="col">Acciones</th>
 									</tr>
 								</thead>
@@ -75,7 +77,13 @@
 												<%= discount %>
 											</td>
 											<td>
-												<%= category=="in-sale" ? 'Ofertas' : 'Ultimos agregados' %>
+												<%= brand.name%>
+											</td>
+											<td>
+												<%= category.name%>
+											</td>
+											<td>
+												<%= subcategory.name%>
 											</td>
 											<td>
 												<div class="d-flex gap-2">
@@ -106,6 +114,7 @@
 							<tfoot>
 								<%- include('../partials/pager', {
 									path : '/admin/products',
+									filterCategory,
 									currentPage,
 									totalPages
 								}) %>

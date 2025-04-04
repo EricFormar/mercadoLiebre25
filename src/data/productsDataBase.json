@@ -4,7 +4,7 @@
     "name": "Cafetera Moulinex Dolce Gusto Edited",
     "price": 50000,
     "discount": 50,
-    "category": "Hogar - Muebles - Jardín",
+    "category": "Hogar",
     "subcategory" : "Electrodomésticos",
     "description": "Cafetera Dolce Gusto Lumio. La cafetera Dolce Gusto Lumio es de variedad automática que ha llegado con un diseño radical al que nos tenía acostumbrados Dolce Gusto.En este post te contamos todo lo que necesitas saber sobre ella, desde sus características técnicas hasta la calidad de las cápsulas o price.",
     "image": "img-cafetera-moulinex.jpg",
@@ -26,7 +26,7 @@
     "name": "Samsung Galaxy S10",
     "price": 72999,
     "discount": 25,
-    "category": "Electrónica",
+    "category": "Telefonía",
     "subcategory" : "Celulares - Teléfonos",
     "description": "Experiencia visual excepcional. Mirá tus series y películas favoritas con la mejor definición.Tendrás colores brillantes y detalles precisos en todos tus contenidos.Disfrutá aún más del mejor entretenimiento gracias a su vasta pantalla y ángulos de visión amplios.",
     "image": "img-samsung-galaxy-s10.jpg",
@@ -39,7 +39,7 @@
     "price": 47900,
     "discount": 10,
     "image": "img-heladera-whirpool.jpg",
-    "category": "Hogar - Muebles - Jardín",
+    "category": "Hogar",
     "subcategory" : "Electrodomésticos",
     "section" : "in-sale"
   },
@@ -61,7 +61,7 @@
     "price": 20999,
     "discount": 12,
     "image": "img-aire-acondicionado.jpg",
-    "category": "Hogar - Muebles - Jardín",
+    "category": "Hogar",
     "subcategory" : "Electrodomésticos",
     "section" : "in-sale"
   },
@@ -84,7 +84,7 @@
     "discount": 2,
     "image": "img-iphone-11.jpg",
     "subcategory" : "Celulares - Teléfonos",
-    "category": "Teléfonos - Tablets",
+    "category": "Telefonía",
     "section" : "in-sale"
   },
   {
@@ -160,7 +160,7 @@
     "price": 15979,
     "discount": 12,
     "image": "img-bicicleta-fierce.jpg",
-    "category": "Deportes - Bicicletas",
+    "category": "Aire Libre",
     "subcategory" : "Bicicletas - Ciclismo",
     "section" : "in-sale"
   },

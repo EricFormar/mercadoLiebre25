@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 
 const {toThousand} = require('../utils')
-const categories = require('../data/categories.json')
+const categories = [];
 const { readJson, saveJson } = require('../data/index.js')
 
 module.exports = { 
