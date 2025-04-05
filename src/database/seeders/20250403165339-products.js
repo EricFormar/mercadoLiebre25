@@ -30,7 +30,7 @@ module.exports = {
         price: product.price,
         discount: product.discount || 0,
         description: product.description,
-        sectionId: product.sectionId == "visited" ? 1 : 2,
+        sectionId: product.section == "visited" ? 1 : 2,
         categoryId: category? category.id : null,
         subcategoryId: subcategory ? subcategory.id : null,
         brandId: brand ? brand.id : null,

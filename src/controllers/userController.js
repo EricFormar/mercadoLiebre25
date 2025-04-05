@@ -1,60 +1,71 @@
-const { v4: uuidv4, validate } = require('uuid');
 const bcrypt = require('bcrypt');
-const { readJson, saveJson } = require('../data/index.js');
+const db = require('../database/models')
 
 module.exports = {
   register: (req, res) => {
     return res.render("users/register");
   },
-  processRegister: function (req, res) {
+  processRegister: async (req, res) => {
 
-    const users = readJson('users.json')
-    const {name, surname, email, password} = req.body
+    try {
+      // TODO : agregar validaciones
+      const { name, surname, email, password } = req.body
 
-    const newUser = {
-      id : uuidv4(),
-      name : name.trim(),
-      surname : surname.trim(),
-      email : email.trim(),
-      password : bcrypt.hashSync(password, 10),
-      token : null,
-      validate : true,
-      lock : false,
-      rol : 'user'
+      db.User.create({
+        name: name.trim(),
+        surname: surname.trim(),
+        email: email.trim(),
+        password: bcrypt.hashSync(password, 10),
+        token: null,
+        validate: true,
+        lock: false,
+        rolId: 2
+      })
+
+      return res.redirect('/users/login');
+
+    } catch (error) {
+      return res.status(500).render('error', {
+        message: error.message,
+      })
     }
-
-    users.push(newUser)
-    saveJson('users.json', users);
-
-    return res.redirect('/users/login');
   },
   login: (req, res) => {
     return res.render("users/login");
   },
-  processLogin: (req, res) => {
-    
-    const users = readJson('users.json')
-    const {email, password} = req.body
+  processLogin: async (req, res) => {
 
-    const user = users.find(user => user.email === email && bcrypt.compareSync(password, user.password))
+    try {
+      // TODO: implementar validaciones
+      const { email, password } = req.body
+      const user = await db.User.findOne({
+        email
+      })
+      if (!user || !bcrypt.compareSync(password, user.password)) {
+        throw new Error("Credenciales inválidas");
+      }
 
-    if(!user){
-      return res.render('users/login',{
-        error : "Credenciales inválidas"
+      req.session.userLogin = {
+        id: user.id,
+        name: user.name,
+        rol: user.rolId
+      }
+
+      return res.redirect('/')
+
+    } catch (error) {
+      return res.status(500).render('error', {
+        message: error.message,
       })
     }
-    
-    req.session.userLogin = {
-      id : user.id,
-      name : user.name,
-      rol : user.rol
-    }
-
-    return res.redirect('/')
   },
   profile: (req, res) => {
     return res.render('users/profile')
   },
-  update: (req, res) => {},
-  logout: (req, res) => {},
+  update: (req, res) => { },
+  logout: (req, res) => { 
+    req.session.destroy();
+    res.clearCookie('connect.sid');
+    return res.redirect('/');
+  },
 };

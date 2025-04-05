@@ -76,7 +76,6 @@ module.exports = {
                     order: [['name']]
                 })
             ]) 
-            console.log(products);
             
             const { items, total } = paginator(products, page, perPage)
             return res.render('products/productsAdmin', {
