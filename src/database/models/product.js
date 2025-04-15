@@ -48,14 +48,109 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Product.init({
-    name: DataTypes.STRING,
-    price: DataTypes.INTEGER,
-    discount: DataTypes.INTEGER,
-    sectionId: DataTypes.INTEGER,
-    categoryId: DataTypes.INTEGER,
-    brandId: DataTypes.INTEGER,
-    subcategoryId: DataTypes.INTEGER,
-    description: DataTypes.STRING
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'El nombre del producto es requerido'
+        },
+        len: {
+          args: [2, 100],
+          msg: 'El nombre debe tener entre 2 y 100 caracteres'
+        }
+      }
+    },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        isInt: {
+          msg: 'El precio debe ser un número entero'
+        },
+        min: {
+          args: [0],
+          msg: 'El precio no puede ser negativo'
+        }
+      }
+    },
+    discount: {
+      type: DataTypes.INTEGER,
+      validate: {
+        isInt: {
+          msg: 'El descuento debe ser un número entero'
+        },
+        min: {
+          args: [0],
+          msg: 'El descuento no puede ser negativo'
+        },
+        max: {
+          args: [100],
+          msg: 'El descuento no puede exceder el 100%'
+        }
+      }
+    },
+    sectionId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Section',
+        key: 'id'
+      },
+      validate: {
+        isInt: {
+          msg: 'La sección debe ser un número válido'
+        }
+      }
+    },
+    categoryId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Category',
+        key: 'id'
+      },
+      validate: {
+        isInt: {
+          msg: 'La categoría debe ser un número válido'
+        }
+      }
+    },
+    brandId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Brand',
+        key: 'id'
+      },
+      validate: {
+        isInt: {
+          msg: 'La marca debe ser un número válido'
+        }
+      }
+    },
+    subcategoryId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Subcategory',
+        key: 'id'
+      },
+      validate: {
+        isInt: {
+          msg: 'La subcategoría debe ser un número válido'
+        }
+      }
+    },
+    description: {
+      type: DataTypes.STRING,
+      validate: {
+        len: {
+          args: [0, 500],
+          msg: 'La descripción no puede exceder los 500 caracteres'
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Product',

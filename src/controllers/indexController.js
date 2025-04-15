@@ -23,7 +23,6 @@ module.exports = {
                     ]
                 })
             ])
-            console.log(newest);
 
             res.render('home', {
                 newest,

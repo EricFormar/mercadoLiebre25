@@ -1,74 +1,243 @@
 <!DOCTYPE html>
 <html lang="es">
 <!-- Include Head -->
-<%- include('../partials/headAdmin', {title: 'Formulario de creación'}) %>
-<body>
-	<!-- Header -->
-	<%- include('../partials/headerAdmin') %>
-	<!-- /Header -->
+<%- include('../partials/headAdmin', {title: 'Formulario de creación' }) %>
 
-	<div class="container my-3">
-		<div class="row">
-			<div class="col-12 mb-3">
-				<h2 class="products-title">Nuevo producto</h2>
-			</div>
-		</div>
-       
-		<div class="col-12 col-md-10 col-lg-8 mx-auto">
-            <div class="card shadow-lg">
-                <div class="card-header bg-warning">
-                    Formulario de creación de productos                
+    <body>
+        <!-- Header -->
+        <%- include('../partials/headerAdmin') %>
+            <!-- /Header -->
+
+            <div class="container my-3">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <h2 class="products-title">Nuevo producto</h2>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <form action="/products/create" method="POST" id="formAddProduct" >
-                        <div class="row product-detail">
-                            <div class="col-12 col-md-6">
-                                <label for="name" class="form-label">Nombre del producto:</label>
-                                <input type="text" id="name" name="name" class="form-control form-control-lg py-3 ">
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <label for="price" class="form-label">Precio del producto:</label>
-                                <input type="number" id="price" name="price" class="form-control form-control-lg py-3 ">        
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <label for="discount" class="form-label">Descuento:</label>
-                                <input type="text" id="discount" value="0" name="discount"  class="form-control form-control-lg py-3 ">
-                            </div>
-                            
-                            <div class="col-12 col-md-6">
-                                <label for="category" class="form-label">Categoría:</label>
-                                <select name="category" id="category" class="form-control form-control-lg form-select-lg">
-                                    <option value="" hidden selected>Elegí la categoría</option>
-                                    <% categories.forEach(category => { %>
-                                        <option value="<%= category %>" ><%= category == "in-sale" ? 'Ofertas' : 'Ultimos agregados' %></option>
-                                    <% }) %>
-                                </select>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <label for="image" class="form-label">Subir imagen</label>
-                                <input class="form-control form-control-lg" type="file" name="image" id="image">
-                            </div>
-                            
-                            
-                            <div class="col-12 mb-3">
-                                <label for="description" class="form-label">Descripción:</label>
-                                <textarea name="description" id="description" class="form-control form-control-lg py-3" style="resize: none;" rows="5"></textarea>
-                                <p id="descriptionInfo" hidden><span id="numberCharacters"></span> disponibles</p>
-        
-                            </div>
-                        
-                            
-                            <div class="col-12 d-flex justify-content-end">
-                                <button type="submit" class="btn btn-outline-dark">Guardar producto</button>
-                            </div>
+
+                <div class="col-12 col-md-10 col-lg-8 mx-auto">
+                    <div class="card shadow-lg">
+                        <div class="card-header bg-warning">
+                            Formulario de creación de productos
                         </div>
-                    </form>
-                </div>
-            </div>
-			
-		</div>
+                        <div class="card-body">
+                            <form action="/products/create" method="POST" id="formAddProduct"
+                                enctype="multipart/form-data">
+                                <div class="row product-detail">
 
-	</div>
-	<!-- /todos los productos -->
-</body>	
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="name" class="form-label">Nombre del producto:</label>
+                                        <input type="text" id="name" name="name"
+                                            class="form-control form-control-lg py-3 <%= (locals.errors && errors.name) && 'is-invalid' %>">
+                                        <span class="text-danger" id="name-error">
+                                            <%= (locals.errors && errors.name) && errors.name.msg %>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-3 mb-3">
+                                        <label for="price" class="form-label">Precio del producto:</label>
+                                        <input type="number" id="price" name="price"
+                                            class="form-control form-control-lg py-3 <%= (locals.errors && errors.price) && 'is-invalid' %>">
+                                        <%= (locals.errors && errors.price) && errors.price.msg %>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-3 mb-3">
+                                        <label for="discount" class="form-label">Descuento:</label>
+                                        <input type="text" id="discount" value="0" name="discount"
+                                            class="form-control form-control-lg py-3 <%= (locals.errors && errors.discount) && 'is-invalid' %>">
+                                        <%= (locals.errors && errors.discount) && errors.discount.msg %>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="section" class="form-label">Sección:</label>
+                                        <select name="section" id="section"
+                                            class="form-control form-control-lg form-select-lg <%= (locals.errors && errors.name) && 'is-invalid' %>">
+                                            <option value="" hidden selected>Elegí la sección</option>
+                                            <% sections.forEach(section=> { %>
+                                                <option value="<%= section.id %>">
+                                                    <%= section.name %>
+                                                </option>
+                                                <% }) %>
+                                        </select>
+                                        <%= (locals.errors && errors.name) && errors.name.msg %>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="brand" class="form-label">Marca:</label>
+                                        <select name="brand" id="brand"
+                                            class="form-control form-control-lg form-select-lg <%= (locals.errors && errors.brand) && 'is-invalid' %>">
+                                            <option value="" hidden selected>Elegí la marca</option>
+                                            <% brands.forEach(brand=> { %>
+                                                <option value="<%= brand.id %>">
+                                                    <%= brand.name %>
+                                                </option>
+                                                <% }) %>
+                                        </select>
+                                        <%= (locals.errors && errors.brand) && errors.brand.msg %>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="category" class="form-label">Categoría:</label>
+                                        <select name="category" id="category"
+                                            class="form-control form-control-lg form-select-lg <%= (locals.errors && errors.category) && 'is-invalid' %>">
+                                            <option value="" hidden selected>Elegí la categoría</option>
+                                            <% categories.forEach(category=> { %>
+                                                <option value="<%= category.id %>">
+                                                    <%= category.name %>
+                                                </option>
+                                                <% }) %>
+                                        </select>
+                                        <%= (locals.errors && errors.category) && errors.category.msg %>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="subcategory" class="form-label">Subcategoría:</label>
+                                        <select name="subcategory" id="subcategory"
+                                            class="form-control form-control-lg form-select-lg <%= (locals.errors && errors.subcategory) && 'is-invalid' %>">
+                                            <option value="" hidden selected>Elegí la categoría</option>
+                                            <% subcategories.forEach(subcategory=> { %>
+                                                <option value="<%= subcategory.id %>">
+                                                    <%= subcategory.name %>
+                                                </option>
+                                                <% }) %>
+                                        </select>
+                                        <%= (locals.errors && errors.subcategory) && errors.subcategory.msg %>
+                                    </div>
+
+                                    <div class="col-12 mb-3">
+                                        <label for="description" class="form-label">Descripción:</label>
+                                        <textarea name="description" id="description"
+                                            class="form-control form-control-lg py-3 <%= (locals.errors && errors.description) && 'is-invalid' %>"
+                                            style="resize: none;" rows="3"></textarea>
+                                        <p id="descriptionInfo" hidden><span id="numberCharacters"></span> disponibles
+                                        </p>
+                                        <%= (locals.errors && errors.description) && errors.description.msg %>
+                                    </div>
+
+                                    <div class="col-12 mb-3">
+                                        <div
+                                            class="d-flex flex-column flex-md-row gap-2 justify-content-around align-items-center">
+                                            <div>
+                                                <label for="image" class="btn btn-outline-dark">Subir imagen</label>
+                                                <input hidden class="form-control form-control-lg" type="file"
+                                                    name="image" id="image">
+                                            </div>
+                                            <button type="submit" class="btn btn-outline-dark">Guardar producto</button>
+                                        </div>
+                                        <span class="text-danger text-center" id="form-error"></span>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <script>
+
+                const $ = (e) => document.getElementById(e)
+
+                const formAddProduct = document.getElementById('formAddProduct')
+                const inputName = document.getElementById('name')
+                const inputPrice = document.getElementById('price')
+                const inputDiscount = document.getElementById('discount')
+                const inputDescription = document.getElementById('description')
+                const selectSecction = document.getElementById('section')
+                const selectBrand = document.getElementById('brand')
+                const selectCategory = document.getElementById('category')
+                const selectSubcategory = document.getElementById('subcategory')
+
+                inputName.addEventListener('blur', function() {
+                    switch (true) {
+                        case this.value.length < 2:
+                            this.classList.add('is-invalid')
+                            $('name-error').innerHTML = 'El nombre debe tener al menos 2 caracteres'
+                            break;
+                        case this.value.length > 100:
+                            this.classList.add('is-invalid')
+                            $('name-error').innerHTML = 'El nombre debe tener no más de 100 caracteres'
+                            break;
+                        default:
+                            this.classList.remove('is-invalid')
+                            this.classList.add('is-valid')
+                            $('name-error').innerHTML = null
+                            break;
+                    }
+                });
+
+                inputPrice.addEventListener('blur', function() {
+                    switch (true) {
+                        case this.value < 1:
+                            this.classList.add('is-invalid')
+                            $('price-error').innerHTML = 'El precio debe ser mayor a 0'
+                            break;
+                        case this.value > 1000000:
+                            this.classList.add('is-invalid')
+                            $('price-error').innerHTML = 'El precio debe ser menor a 1000000'
+                            break;
+                        default:
+                            this.classList.remove('is-invalid')
+                            this.classList.add('is-valid')
+                            $('price-error').innerHTML = null
+                            break;
+                    }
+                })
+                inputDiscount.addEventListener('blur', function() {
+                    switch (true) {
+                        case this.value < 0:
+                            this.classList.add('is-invalid')
+                            $('discount-error').innerHTML = 'El descuento debe ser mayor a 0'
+                            break;  
+                        case this.value > 100:      
+                            this.classList.add('is-invalid')    
+                            $('discount-error').innerHTML = 'El descuento debe ser menor a 100'     
+                            break;  
+                        default:            
+                            this.classList.remove('is-invalid')
+                            this.classList.add('is-valid')
+                            $('discount-error').innerHTML = null
+                            break; 
+                    }
+                })
+                inputDescription.addEventListener('blur', function() {
+                    switch (true) {
+                        case this.value.length < 20:
+                            this.classList.add('is-invalid')
+                            $('description-error').innerHTML = 'La descripción debe tener al menos 20 caracteres'
+                            break;                  
+                        case this.value.length > 2000:      
+                            this.classList.add('is-invalid')            
+                            $('description-error').innerHTML = 'La descripción debe tener no más de 2000 caracteres'            
+                            break;
+                        default:    
+                            this.classList.remove('is-invalid')
+                            this.classList.add('is-valid')
+                            $('description-error').innerHTML = null
+                            break;
+                    }
+                })
+
+                formAddProduct.addEventListener('submit', function(e) {
+                    let error = false
+                    let elementsForm = this.elements
+                    for (let index = 0; index < elementsForm.length - 1; index++) {
+                        if (elementsForm[index].value == '' || elementsForm[index].classList.contains('is-invalid')) {
+                            elementsForm[index].classList.add('is-invalid')
+                            error = true
+                        }
+                    }
+
+                    if (error) {
+                        e.preventDefault()
+                        $('form-error').innerHTML = 'Los campos señalados son obligatorios'
+                    }else {
+                        this.submit()
+                    }   
+                })
+
+            </script>
+    </body>
+
 </html>
+
+
