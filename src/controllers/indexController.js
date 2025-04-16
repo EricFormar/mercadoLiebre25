@@ -36,8 +36,33 @@ module.exports = {
         }
 
     },
-    admin: (req, res) => {
-        return res.render('admin')
+    admin: async (req, res) => {
+        try {
+            const [countProducts, countUsers, lastProduct, categories] = await Promise.all([
+                db.Product.count(),
+                db.User.count(),
+                db.Product.findAll({
+                    order : [['createdAt', 'DESC']],
+                    limit: 1,
+                    include: [
+                        { association: 'images' }
+                    ]
+                }),
+                db.Category.findAll({
+                    order: [['name']]
+                }),
+            ])
+            return res.render('admin', {
+                countProducts,
+                countUsers,
+                lastProduct: lastProduct[0],
+                categories,
+            })
+        } catch (error) {
+            return res.status(500).render('error', {
+                message: error.message,
+            })
+        }
     },
     adminProducts: async (req, res) => {
         try {

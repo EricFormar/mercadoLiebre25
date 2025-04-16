@@ -9,12 +9,6 @@
             <!-- /Header -->
 
             <div class="container my-3">
-                <div class="row">
-                    <div class="col-12 mb-3">
-                        <h2 class="products-title">Nuevo producto</h2>
-                    </div>
-                </div>
-
                 <div class="col-12 col-md-10 col-lg-8 mx-auto">
                     <div class="card shadow-lg">
                         <div class="card-header bg-warning">
@@ -25,7 +19,7 @@
                                 enctype="multipart/form-data">
                                 <div class="row product-detail">
 
-                                    <div class="col-12 col-md-6 mb-3">
+                                    <div class="col-12 col-lg-6 mb-3">
                                         <label for="name" class="form-label">Nombre del producto:</label>
                                         <input type="text" id="name" name="name"
                                             class="form-control form-control-lg py-3 <%= (locals.errors && errors.name) && 'is-invalid' %>">
@@ -38,14 +32,18 @@
                                         <label for="price" class="form-label">Precio del producto:</label>
                                         <input type="number" id="price" name="price"
                                             class="form-control form-control-lg py-3 <%= (locals.errors && errors.price) && 'is-invalid' %>">
-                                        <%= (locals.errors && errors.price) && errors.price.msg %>
+                                        <span class="text-danger" id="price-error">
+                                            <%= (locals.errors && errors.price) && errors.price.msg %>
+                                        </span>
                                     </div>
 
                                     <div class="col-12 col-md-6 col-lg-3 mb-3">
                                         <label for="discount" class="form-label">Descuento:</label>
                                         <input type="text" id="discount" value="0" name="discount"
                                             class="form-control form-control-lg py-3 <%= (locals.errors && errors.discount) && 'is-invalid' %>">
-                                        <%= (locals.errors && errors.discount) && errors.discount.msg %>
+                                        <span class="text-danger" id="discount-error">
+                                            <%= (locals.errors && errors.discount) && errors.discount.msg %>
+                                        </span>
                                     </div>
 
                                     <div class="col-12 col-md-6 mb-3">
@@ -59,7 +57,9 @@
                                                 </option>
                                                 <% }) %>
                                         </select>
-                                        <%= (locals.errors && errors.name) && errors.name.msg %>
+                                        <span class="text-danger" id="section-error">
+                                            <%= (locals.errors && errors.section) && errors.section.msg %>
+                                        </span>
                                     </div>
 
                                     <div class="col-12 col-md-6 mb-3">
@@ -73,7 +73,9 @@
                                                 </option>
                                                 <% }) %>
                                         </select>
-                                        <%= (locals.errors && errors.brand) && errors.brand.msg %>
+                                        <span class="text-danger" id="brand-error">
+                                            <%= (locals.errors && errors.brand) && errors.brand.msg %>
+                                        </span>
                                     </div>
 
                                     <div class="col-12 col-md-6 mb-3">
@@ -87,7 +89,9 @@
                                                 </option>
                                                 <% }) %>
                                         </select>
-                                        <%= (locals.errors && errors.category) && errors.category.msg %>
+                                        <span class="text-danger" id="category-error">
+                                            <%= (locals.errors && errors.category) && errors.category.msg %>
+                                        </span>
                                     </div>
 
                                     <div class="col-12 col-md-6 mb-3">
@@ -101,26 +105,41 @@
                                                 </option>
                                                 <% }) %>
                                         </select>
-                                        <%= (locals.errors && errors.subcategory) && errors.subcategory.msg %>
+                                        <span class="text-danger" id="subcategory">
+                                            <%= (locals.errors && errors.subcategory) && errors.subcategory.msg %>
+                                        </span>
                                     </div>
 
-                                    <div class="col-12 mb-3">
+                                    <div class="col-12 col-md-6 mb-3">
                                         <label for="description" class="form-label">Descripción:</label>
                                         <textarea name="description" id="description"
                                             class="form-control form-control-lg py-3 <%= (locals.errors && errors.description) && 'is-invalid' %>"
-                                            style="resize: none;" rows="3"></textarea>
+                                            style="resize: none;" rows="5"></textarea>
                                         <p id="descriptionInfo" hidden><span id="numberCharacters"></span> disponibles
                                         </p>
-                                        <%= (locals.errors && errors.description) && errors.description.msg %>
+                                        <span class="text-danger" id="description-error">
+                                            <%= (locals.errors && errors.description) && errors.description.msg %>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="description" class="form-label">Imagen:</label>
+                                        <div class="border w-100 rounded d-flex justify-content-center p-2 " style="height: 185px;" id="box-image-preview">
+                                         
+                                        </div>
+                                        <span class="text-danger" id="image-error">
+                                            <%= (locals.errors && errors.image) && errors.image.msg %>
+                                        </span>
                                     </div>
 
                                     <div class="col-12 mb-3">
                                         <div
-                                            class="d-flex flex-column flex-md-row gap-2 justify-content-around align-items-center">
+                                            class="d-flex flex-column flex-md-row justify-content-end gap-2 align-items-center">
                                             <div>
-                                                <label for="image" class="btn btn-outline-dark">Subir imagen</label>
-                                                <input hidden class="form-control form-control-lg" type="file"
+                                                <label for="image" class="btn btn-outline-dark m-0">Agregar imagen</label>
+                                                <input hidden class="form-control form-control" type="file"
                                                     name="image" id="image">
+                                              
                                             </div>
                                             <button type="submit" class="btn btn-outline-dark">Guardar producto</button>
                                         </div>
@@ -146,21 +165,18 @@
                 const selectBrand = document.getElementById('brand')
                 const selectCategory = document.getElementById('category')
                 const selectSubcategory = document.getElementById('subcategory')
+                const inputImage = document.getElementById('image')
 
                 inputName.addEventListener('blur', function() {
                     switch (true) {
                         case this.value.length < 2:
-                            this.classList.add('is-invalid')
-                            $('name-error').innerHTML = 'El nombre debe tener al menos 2 caracteres'
+                           showError('name', 'El nombre debe tener al menos 2 caracteres')
                             break;
                         case this.value.length > 100:
-                            this.classList.add('is-invalid')
-                            $('name-error').innerHTML = 'El nombre debe tener no más de 100 caracteres'
+                          showError('name', 'El nombre debe tener menos de 100 caracteres')
                             break;
                         default:
-                            this.classList.remove('is-invalid')
-                            this.classList.add('is-valid')
-                            $('name-error').innerHTML = null
+                           cleanError('name')
                             break;
                     }
                 });
@@ -168,54 +184,114 @@
                 inputPrice.addEventListener('blur', function() {
                     switch (true) {
                         case this.value < 1:
-                            this.classList.add('is-invalid')
-                            $('price-error').innerHTML = 'El precio debe ser mayor a 0'
+                          showError('price', 'El precio debe ser mayor a 0')
                             break;
                         case this.value > 1000000:
-                            this.classList.add('is-invalid')
-                            $('price-error').innerHTML = 'El precio debe ser menor a 1000000'
+                           showError('price', 'El precio debe ser menor a 1.000.000')
                             break;
                         default:
-                            this.classList.remove('is-invalid')
-                            this.classList.add('is-valid')
-                            $('price-error').innerHTML = null
+                            cleanError('price')
                             break;
                     }
                 })
                 inputDiscount.addEventListener('blur', function() {
                     switch (true) {
                         case this.value < 0:
-                            this.classList.add('is-invalid')
-                            $('discount-error').innerHTML = 'El descuento debe ser mayor a 0'
+                           showError('discount', 'El descuento debe ser mayor a 0')
                             break;  
                         case this.value > 100:      
-                            this.classList.add('is-invalid')    
-                            $('discount-error').innerHTML = 'El descuento debe ser menor a 100'     
+                           showError('discount', 'El descuento debe ser menor a 100')
                             break;  
                         default:            
-                            this.classList.remove('is-invalid')
-                            this.classList.add('is-valid')
-                            $('discount-error').innerHTML = null
+                           cleanError('discount')
                             break; 
                     }
                 })
                 inputDescription.addEventListener('blur', function() {
                     switch (true) {
                         case this.value.length < 20:
-                            this.classList.add('is-invalid')
-                            $('description-error').innerHTML = 'La descripción debe tener al menos 20 caracteres'
+                            showError('description', 'La descripción debe tener al menos 20 caracteres')
                             break;                  
-                        case this.value.length > 2000:      
-                            this.classList.add('is-invalid')            
-                            $('description-error').innerHTML = 'La descripción debe tener no más de 2000 caracteres'            
+                        case this.value.length > 500:
+                            showError('description', 'La descripción debe tener no más de 500 caracteres')
                             break;
                         default:    
-                            this.classList.remove('is-invalid')
-                            this.classList.add('is-valid')
-                            $('description-error').innerHTML = null
+                           cleanError('description')
                             break;
                     }
+                });
+
+                selectSecction.addEventListener('blur', function() {
+                    if (this.value == '') {
+                        showError('section', 'Debes elegir una sección')
+                    }else {
+                        cleanError('section')
+                    }
                 })
+                selectBrand.addEventListener('blur', function() {
+                    if (this.value == '') {
+                        showError('brand', 'Debes elegir una marca')
+                    }else {
+                        cleanError('brand')
+                    }
+                })
+                selectCategory.addEventListener('blur', function() {
+                    if (this.value == '') {
+                        showError('category', 'Debes elegir una categoría')
+                    }else {
+                        cleanError('category')
+                    }
+                })
+                selectSubcategory.addEventListener('blur', function() {
+                    if (this.value == '') {
+                        showError('subcategory', 'Debes elegir una subcategoría')
+                    }else {
+                        cleanError('subcategory')
+                    }
+                })
+
+                inputImage.addEventListener('change', function() {
+                    let file = this.files[0]
+                    let type = file.type
+                    let name = file.name
+                    let size = file.size
+                    let extension = name.split('.')[1]
+                    let extensionsValid = ['png', 'jpg', 'jpeg', 'gif']
+                    cleanError('image');
+                    $('box-image-preview').innerHTML = null
+                    $('box-image-preview').classList.remove('border-danger')
+                    if (extensionsValid.includes(extension)) {
+                        if (size <= 1000000) {
+                            let reader = new FileReader()
+                            reader.readAsDataURL(file)
+                            reader.onload = function(e) {
+                                let route = e.target.result
+                                let template = `
+                                    <img src="${route}" alt="${name}" height="100%">
+                                `
+                                $('box-image-preview').innerHTML = template
+                            }
+                        }else {
+                            $('box-image-preview').classList.add('border-danger')
+                            showError('image', 'La imagen debe pesar menos de 1MB')
+                        }
+                    }else {
+                        $('box-image-preview').classList.add('border-danger')
+                        showError('image', 'La imagen debe ser un archivo con extensión png, jpg, jpeg o gif')
+                    }
+                })
+
+                const showError = (field, msg) => {
+                    $(field).classList.remove('is-valid')                    
+                    $(field).classList.add('is-invalid')
+                    $(`${field}-error`).innerHTML = msg
+                }
+
+                const cleanError = (field) => {
+                    $(field).classList.remove('is-invalid')
+                    $(field).classList.add('is-valid')                    
+                    $(`${field}-error`).innerHTML = null
+                }
 
                 formAddProduct.addEventListener('submit', function(e) {
                     let error = false

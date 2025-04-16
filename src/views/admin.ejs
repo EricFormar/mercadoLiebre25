@@ -26,21 +26,23 @@
 							<!-- Content Row Movies-->
 							<div class="row">
 								<div class="col-md-4 mb-4">
-									<div class="card border-left-primary shadow h-100 py-2">
-										<div class="card-body">
-											<div class="row no-gutters align-items-center">
-												<div class="col mr-2">
-													<div
-														class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-														Productos</div>
-													<div class="h5 mb-0 font-weight-bold text-gray-800">21</div>
-												</div>
-												<div class="col-auto">
-													<i class="fas fa-shopping-bag fa-2x text-gray-300"></i>
+									<a href="/admin/products" style="text-decoration: none;">
+										<div class="card border-left-primary shadow h-100 py-2">
+											<div class="card-body">
+												<div class="row no-gutters align-items-center">
+													<div class="col mr-2">
+														<div
+															class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+															Productos</div>
+														<div class="h5 mb-0 font-weight-bold text-gray-800"><%= countProducts %> </div>
+													</div>
+													<div class="col-auto">
+														<i class="fas fa-shopping-bag fa-2x text-gray-300"></i>
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
+									</a>
 								</div>
 								<div class="col-md-4 mb-4">
 									<div class="card border-left-success shadow h-100 py-2">
@@ -70,7 +72,7 @@
 														class="text-xs font-weight-bold text-warning text-uppercase mb-1">
 														Usuarios
 													</div>
-													<div class="h5 mb-0 font-weight-bold text-gray-800">49</div>
+													<div class="h5 mb-0 font-weight-bold text-gray-800"><%= countUsers %> </div>
 												</div>
 												<div class="col-auto">
 													<i class="fas fa-users fa-2x text-gray-300"></i>
@@ -94,14 +96,11 @@
 										<div class="card-body">
 											<div class="text-center">
 												<img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 40rem;"
-													src="/images/products/img-parlante-sony.jpg"
+													src="/images/products/<%= lastProduct.images.length ? lastProduct.images[0].file : 'default-image.png' %> "
 													alt=" Star Wars - Mandalorian ">
 											</div>
-											<h4>Sony Srs-xb12 Parlante Bluetooth Portátil</h4>
-											<p>Deja que la música dance cobre vida con EXTRA BASS™ Anima el ambiente con
-												EXTRA BASS™1. Un radiador pasivo trabaja con el parlante monoaural para
-												potenciar los tonos bajos y mejorar los graves, a pesar del tamaño
-												compacto. </p>
+											<h4><%= lastProduct.name %> </h4>
+											<p><%= lastProduct.description %>  </p>
 										</div>
 									</div>
 								</div>
@@ -115,77 +114,15 @@
 										</div>
 										<div class="card-body">
 											<div class="row">
-												<div class="col-lg-6 mb-4">
-													<div class="card bg-dark text-white shadow">
-														<div class="card-body">
-															Computación
+												<% categories.forEach(category => { %>
+													<div class="col-lg-6 mb-4">
+														<div class="card bg-dark text-white shadow">
+															<div class="card-body">
+																<%= category.name %> 
+															</div>
 														</div>
 													</div>
-												</div>
-												<div class="col-lg-6 mb-4">
-													<div class="card bg-dark text-white shadow">
-														<div class="card-body">
-															Hogar y muebles
-														</div>
-													</div>
-												</div>
-												<div class="col-lg-6 mb-4">
-													<div class="card bg-dark text-white shadow">
-														<div class="card-body">
-															Herramientas
-														</div>
-													</div>
-												</div>
-												<div class="col-lg-6 mb-4">
-													<div class="card bg-dark text-white shadow">
-														<div class="card-body">
-															Audio y sonido
-														</div>
-													</div>
-												</div>
-												<div class="col-lg-6 mb-4">
-													<div class="card bg-dark text-white shadow">
-														<div class="card-body">
-															Celulares
-														</div>
-													</div>
-												</div>
-												<div class="col-lg-6 mb-4">
-													<div class="card bg-dark text-white shadow">
-														<div class="card-body">
-															Electrodomésticos
-														</div>
-													</div>
-												</div>
-												<div class="col-lg-6 mb-4">
-													<div class="card bg-dark text-white shadow">
-														<div class="card-body">
-															Cuidado personal
-														</div>
-													</div>
-												</div>
-												<div class="col-lg-6 mb-4">
-													<div class="card bg-dark text-white shadow">
-														<div class="card-body">
-															Juguetería
-														</div>
-													</div>
-												</div>
-												<div class="col-lg-6 mb-4">
-													<div class="card bg-dark text-white shadow">
-														<div class="card-body">
-															Indumentaria
-														</div>
-													</div>
-												</div>
-												<div class="col-lg-6 mb-4">
-													<div class="card bg-dark text-white shadow">
-														<div class="card-body">
-															Deportes
-														</div>
-													</div>
-												</div>
-
+												<% }) %>
 											</div>
 										</div>
 									</div>
