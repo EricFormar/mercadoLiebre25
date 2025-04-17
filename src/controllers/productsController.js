@@ -250,17 +250,31 @@ module.exports = {
             })
         }
     },
-    remove: function (req, res) {
+    remove: async (req, res) => {
 
-        const products = readJson('productsDataBase.json');
-        const { id } = req.params;
+        try {
+            const product = await db.Product.findByPk(req.params.id, {
+                include: [
+                    { association: 'images' }
+                ]
+            })
+            if(product.images.length){
+                const pathFile = path.join(__dirname, '../../public/images/products', product.images[0].file)
+                fs.existsSync(pathFile) && fs.unlinkSync(pathFile)
+                await db.Image.destroy({
+                    where: {
+                        productId: product.id
+                    }
+                });
+            }
+            await product.destroy();
 
-        const productsModify = products.filter(product => product.id !== +id)
-
-        saveJson('productsDataBase.json', productsModify)
-
-        return res.redirect('/admin')
-
+            return res.redirect('/admin')
+        } catch (error) {
+            return res.status(500).render('error', {
+                message: error.message,
+            })
+        }
     },
 
     search: function (req, res) {
