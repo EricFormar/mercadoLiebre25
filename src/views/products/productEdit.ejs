@@ -1,126 +1,154 @@
 <!DOCTYPE html>
 <html lang="es">
 <!-- Include Head -->
-<%- include('../partials/headAdmin', {title: 'Editando producto'}) %>
-<body>
-	<!-- Header -->
-	<%- include('../partials/headerAdmin') %>
-	<!-- /Header -->
+<%- include('../partials/headAdmin', {title: 'Formulario de creación' }) %>
 
-	<div class="container my-3">
-        <div class="row">
-			<div class="col-12 mb-3">
-				<h2 class="products-title">Editando: <%= name %></h2>
-			</div>
-		</div>
-       
-		<div class="col-12 col-md-10 col-lg-8 mx-auto">
-            <div class="card shadow-lg">
-                <div class="card-header bg-warning">
-                    Formulario de edición de productos                
-                </div>
-                <div class="card-body">
-                    <form action="/products/create" method="POST" id="formAddProduct">
-                        <div class="row product-detail">
+    <body>
+        <!-- Header -->
+        <%- include('../partials/headerAdmin') %>
+            <!-- /Header -->
 
-                            <div class="col-12 col-md-6 mb-3">
-                                <label for="name" class="form-label">Nombre del producto:</label>
-                                <input type="text" id="name" name="name"
-                                    class="form-control form-control-lg py-3 ">
-                            </div>
+            <div class="container my-3">
+                <div class="col-12 col-md-10 col-lg-8 mx-auto">
+                    <div class="card shadow-lg">
+                        <div class="card-header bg-warning">
+                            Editando: <%= name %> 
+                        </div>
+                        <div class="card-body">
+                            <form action="/products/update/<%= id %>?_method=PUT" method="POST" id="formAddProduct"
+                                enctype="multipart/form-data">
+                                <div class="row product-detail">
 
-                            <div class="col-12 col-md-6 col-lg-3 mb-3">
-                                <label for="price" class="form-label">Precio del producto:</label>
-                                <input type="number" id="price" name="price"
-                                    class="form-control form-control-lg py-3 ">
-                            </div>
-
-                            <div class="col-12 col-md-6 col-lg-3 mb-3">
-                                <label for="discount" class="form-label">Descuento:</label>
-                                <input type="text" id="discount" value="0" name="discount"
-                                    class="form-control form-control-lg py-3 ">
-                            </div>
-
-                            <div class="col-12 col-md-6 mb-3">
-                                <label for="section" class="form-label">Sección:</label>
-                                <select name="section" id="section"
-                                    class="form-control form-control-lg form-select-lg">
-                                    <option value="" hidden selected>Elegí la sección</option>
-                                    <% sections.forEach(section=> { %>
-                                        <option value="<%= section.id %>">
-                                            <%= section.name %>
-                                        </option>
-                                        <% }) %>
-                                </select>
-                            </div>
-
-                            <div class="col-12 col-md-6 mb-3">
-                                <label for="brand" class="form-label">Marca:</label>
-                                <select name="brand" id="brand"
-                                    class="form-control form-control-lg form-select-lg">
-                                    <option value="" hidden selected>Elegí la marca</option>
-                                    <% brands.forEach(brand=> { %>
-                                        <option value="<%= brand.id %>">
-                                            <%= brand.name %>
-                                        </option>
-                                        <% }) %>
-                                </select>
-                            </div>
-
-                            <div class="col-12 col-md-6 mb-3">
-                                <label for="category" class="form-label">Categoría:</label>
-                                <select name="category" id="category"
-                                    class="form-control form-control-lg form-select-lg">
-                                    <option value="" hidden selected>Elegí la categoría</option>
-                                    <% categories.forEach(category=> { %>
-                                        <option value="<%= category.id %>">
-                                            <%= category.name %>
-                                        </option>
-                                        <% }) %>
-                                </select>
-                            </div>
-
-                            <div class="col-12 col-md-6 mb-3">
-                                <label for="subcategory" class="form-label">Subcategoría:</label>
-                                <select name="subcategory" id="subcategory"
-                                    class="form-control form-control-lg form-select-lg">
-                                    <option value="" hidden selected>Elegí la categoría</option>
-                                    <% subcategories.forEach(subcategory=> { %>
-                                        <option value="<%= subcategory.id %>">
-                                            <%= subcategory.name %>
-                                        </option>
-                                        <% }) %>
-                                </select>
-                            </div>
-
-                            <div class="col-12 mb-3">
-                                <label for="description" class="form-label">Descripción:</label>
-                                <textarea name="description" id="description"
-                                    class="form-control form-control-lg py-3" style="resize: none;"
-                                    rows="3"></textarea>
-                                <p id="descriptionInfo" hidden><span id="numberCharacters"></span> disponibles
-                                </p>
-
-                            </div>
-
-                            <div class="col-12 mb-3">
-                                <div class="d-flex flex-column flex-md-row gap-2 justify-content-around align-items-center">
-                                    <div>
-                                        <label for="image" class="btn btn-outline-dark">Subir imagen</label>
-                                        <input hidden class="form-control form-control-lg" type="file" name="image"
-                                            id="image">
+                                    <div class="col-12 col-lg-6 mb-3">
+                                        <label for="name" class="form-label">Nombre del producto:</label>
+                                        <input type="text" id="name" name="name" value="<%= name %>"
+                                            class="form-control form-control-lg py-3 <%= (locals.errors && errors.name) && 'is-invalid' %>">
+                                        <span class="text-danger" id="name-error">
+                                            <%= (locals.errors && errors.name) && errors.name.msg %>
+                                        </span>
                                     </div>
-                                    <button type="submit" class="btn btn-outline-dark">Guardar producto</button>
-                                </div>
-                            </div>
-                    </form>
+
+                                    <div class="col-12 col-md-6 col-lg-3 mb-3">
+                                        <label for="price" class="form-label">Precio del producto:</label>
+                                        <input type="number" id="price" name="price" value="<%= price %>"
+                                            class="form-control form-control-lg py-3 <%= (locals.errors && errors.price) && 'is-invalid' %>">
+                                        <span class="text-danger" id="price-error">
+                                            <%= (locals.errors && errors.price) && errors.price.msg %>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-3 mb-3">
+                                        <label for="discount" class="form-label">Descuento:</label>
+                                        <input type="text" id="discount" value="<%= discount %> " name="discount"
+                                            class="form-control form-control-lg py-3 <%= (locals.errors && errors.discount) && 'is-invalid' %>">
+                                        <span class="text-danger" id="discount-error">
+                                            <%= (locals.errors && errors.discount) && errors.discount.msg %>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="section" class="form-label">Sección:</label>
+                                        <select name="section" id="section"
+                                            class="form-control form-control-lg form-select-lg <%= (locals.errors && errors.name) && 'is-invalid' %>">
+                                            <% sections.forEach(section=> { %>
+                                                <option value="<%= section.id %>" <%= section.id == sectionId && 'selected' %> >
+                                                    <%= section.name %>
+                                                </option>
+                                                <% }) %>
+                                        </select>
+                                        <span class="text-danger" id="section-error">
+                                            <%= (locals.errors && errors.section) && errors.section.msg %>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="brand" class="form-label">Marca:</label>
+                                        <select name="brand" id="brand"
+                                            class="form-control form-control-lg form-select-lg <%= (locals.errors && errors.brand) && 'is-invalid' %>">
+                                            <% brands.forEach(brand=> { %>
+                                                <option value="<%= brand.id %>" <%= brand.id == brandId && 'selected' %>>
+                                                    <%= brand.name %>
+                                                </option>
+                                                <% }) %>
+                                        </select>
+                                        <span class="text-danger" id="brand-error">
+                                            <%= (locals.errors && errors.brand) && errors.brand.msg %>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="category" class="form-label">Categoría:</label>
+                                        <select name="category" id="category"
+                                            class="form-control form-control-lg form-select-lg <%= (locals.errors && errors.category) && 'is-invalid' %>">
+                                            <% categories.forEach(category=> { %>
+                                                <option value="<%= category.id %>" <%= category.id == categoryId && 'selected' %>>
+                                                    <%= category.name %>
+                                                </option>
+                                                <% }) %>
+                                        </select>
+                                        <span class="text-danger" id="category-error">
+                                            <%= (locals.errors && errors.category) && errors.category.msg %>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="subcategory" class="form-label">Subcategoría:</label>
+                                        <select name="subcategory" id="subcategory"
+                                            class="form-control form-control-lg form-select-lg <%= (locals.errors && errors.subcategory) && 'is-invalid' %>">
+                                            <% subcategories.forEach(subcategory=> { %>
+                                                <option value="<%= subcategory.id %>" <%= subcategory.id == subcategoryId && 'selected' %>>
+                                                    <%= subcategory.name %>
+                                                </option>
+                                                <% }) %>
+                                        </select>
+                                        <span class="text-danger" id="subcategory">
+                                            <%= (locals.errors && errors.subcategory) && errors.subcategory.msg %>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="description" class="form-label">Descripción:</label>
+                                        <textarea name="description" id="description"
+                                            class="form-control form-control-lg py-3 <%= (locals.errors && errors.description) && 'is-invalid' %>"
+                                            style="resize: none;" rows="5"><%= description %></textarea>
+                                        <p id="descriptionInfo" hidden><span id="numberCharacters"></span> disponibles
+                                        </p>
+                                        <span class="text-danger" id="description-error">
+                                            <%= (locals.errors && errors.description) && errors.description.msg %>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="description" class="form-label">Imagen:</label>
+                                        <div class="border w-100 rounded d-flex justify-content-center p-2 " style="height: 185px;" id="box-image-preview">
+                                            <img id="image-preview" src="/images/products/<%= images.length ? images[0].file : 'default-image.png' %>" alt="Imagen del producto"
+                                                class="img-fluid">
+                                        </div>
+                                        <span class="text-danger" id="image-error">
+                                            <%= (locals.errors && errors.image) && errors.image.msg %>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-12 mb-3">
+                                        <div
+                                            class="d-flex flex-column flex-md-row justify-content-end gap-2 align-items-center">
+                                            <div>
+                                                <label for="image" class="btn btn-outline-dark m-0">Cambiar imagen</label>
+                                                <input hidden class="form-control form-control" type="file"
+                                                    name="image" id="image">
+                                            </div>
+                                            <button type="submit" class="btn btn-outline-dark">Guardar cambios</button>
+                                        </div>
+                                        <span class="text-danger text-center" id="form-error"></span>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-			
-		</div>
+      <script src="/javascripts/productAdd.validator.js"></script>
+    </body>
 
-	</div>
-	<!-- /todos los productos -->
-
-</body>	
 </html>
+
+

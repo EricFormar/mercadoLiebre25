@@ -1,3 +1,5 @@
+const fs = require('fs')
+const path = require('path')
 const { toThousand } = require('../utils')
 const db = require('../database/models')
 const { validationResult } = require('express-validator')
@@ -125,31 +127,10 @@ module.exports = {
 
 
         } catch (error) {
-            console.log(error);
-
             return res.status(500).render('error', {
                 message: error.message,
             })
         }
-
-        /*  const products = readJson('productsDataBase.json')
-         const { name, price, discount, description, category } = req.body
- 
-         const newProduct = {
-             id: products[products.length - 1].id + 1,
-             name: name.trim(),
-             description: description.trim(),
-             price: +price,
-             discount: +discount,
-             image: "default-image.png",
-             category
-         }
- 
-         products.push(newProduct)
- 
-         saveJson('productsDataBase.json', products)
- 
-         return res.redirect('/products/detail/' + newProduct.id) */
     },
 
     edit: async (req, res) => {
@@ -187,27 +168,87 @@ module.exports = {
             })
         }
     },
-    update: function (req, res) {
+    update: async (req, res) => {
+        try {
+            const errors = validationResult(req);
 
-        const products = readJson('productsDataBase.json')
+            if (!errors.isEmpty()) {
 
-        const { name, price, discount, description, category } = req.body
+                const [product, sections, categories, subcategories, brands] = await Promise.all([
+                    db.Product.findByPk(req.params.id, {
+                        include: [
+                            { association: 'images' }
+                        ]
+                    }),
+                    db.Section.findAll({
+                        order: [['name']]
+                    }),
+                    db.Category.findAll({
+                        order: [['name']]
+                    }),
+                    db.Subcategory.findAll({
+                        order: [['name']]
+                    }),
+                    db.Brand.findAll({
+                        order: [['name']]
+                    })
+                ])
+                return res.render('products/productEdit', {
+                    errors: errors.mapped(),
+                    sections,
+                    categories,
+                    subcategories,
+                    brands,
+                    ...product.dataValues
+                })
+            } else {
+                const product = await db.Product.findByPk(req.params.id, {
+                    include: [
+                        { association: 'images' }
+                    ]
+                })
+                const { name, price, discount, description, category, section, brand, subcategory } = req.body;
+                product.set({
+                    name: name.trim(),
+                    description: description.trim(),
+                    price: +price,
+                    discount: +discount,
+                    categoryId: category,
+                    sectionId: section,
+                    brandId: brand,
+                    subcategoryId: subcategory,
+                });
+                await product.save();
 
-        const productsModify = products.map(product => {
-            if (product.id === +req.params.id) {
-                product.name = name.trim();
-                product.price = +price;
-                product.discount = +discount;
-                product.description = description.trim();
-                product.category = category;
+                if(req.file) {
+                    if(product.images.length){
+                        const pathFile = path.join(__dirname, '../../public/images/products', product.images[0].file)
+                        fs.existsSync(pathFile) && fs.unlinkSync(pathFile)
+                        await db.Image.update({
+                            file: req.file.filename
+                        },{
+                            where: {
+                                productId: product.id
+                            }
+                        });
+                    } else {
+                        await db.Image.create({
+                            productId: product.id,
+                            file: req.file.filename
+                        }); 
+                    }
+               
+                }
+               
+                return res.redirect('/admin')
             }
-            return product
-        })
-
-        saveJson('productsDataBase.json', productsModify)
-
-        return res.redirect('/admin')
-
+        } catch (error) {
+            console.log(error);
+            
+            return res.status(500).render('error', {
+                message: error.message,
+            })
+        }
     },
     remove: function (req, res) {
 

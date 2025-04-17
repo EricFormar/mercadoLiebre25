@@ -13,7 +13,7 @@ router
     .get('/add',add) //renderiza el formulario
     .post('/create',upload.single('image'),productValidation,create) //recibe los datos del formulario
     .get('/edit/:id',edit)
-    .put('/update/:id',update)
+    .put('/update/:id',upload.single('image'),update)
     .delete('/remove/:id',remove)
     .get('/search',search)
     .get('/cart',userSessionCheck, showCart)
