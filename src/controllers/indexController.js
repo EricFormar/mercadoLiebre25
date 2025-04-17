@@ -1,4 +1,4 @@
-const { where, or } = require('sequelize');
+const { Op } = require('sequelize');
 const db = require('../database/models')
 const { toThousand, paginator } = require('../utils')
 
@@ -81,7 +81,7 @@ module.exports = {
                 query.where = {
                     ...query.where,
                     name: {
-                        [db.Sequelize.Op.like]: `%${search}%`
+                        [Op.like]: `%${search}%`
                     }
                 }
             }
