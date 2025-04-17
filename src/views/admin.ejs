@@ -116,11 +116,13 @@
 											<div class="row">
 												<% categories.forEach(category => { %>
 													<div class="col-lg-6 mb-4">
-														<div class="card bg-dark text-white shadow">
-															<div class="card-body">
-																<%= category.name %> 
+														<a href="/admin/products?category=<%= category.id %> " style="text-decoration: none;">
+															<div class="card bg-dark text-white shadow">
+																<div class="card-body">
+																	<%= category.name %> 
+																</div>
 															</div>
-														</div>
+														</a>
 													</div>
 												<% }) %>
 											</div>

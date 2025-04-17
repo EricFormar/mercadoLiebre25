@@ -359,6 +359,12 @@ hr {
   border-radius: 8px;
   border: none;
   margin-bottom: 15px;
+  text-decoration: none;
+}
+.buy-now-button:hover{
+  color: white;
+  transform: scale(1.05)  ;
+  transition: all 0.3s;
 }
 
 .action-button {
