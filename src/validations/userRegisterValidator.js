@@ -25,6 +25,7 @@ const userRegisterValidator = [
         if (value !== req.body.password) {
             return false
         }
+        return true
     }).withMessage("La confirmación de contraseña no coincide")
 ]
 
