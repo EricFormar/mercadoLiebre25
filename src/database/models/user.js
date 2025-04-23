@@ -15,6 +15,11 @@ module.exports = (sequelize, DataTypes) => {
         as: 'rol',
         foreignKey: 'rolId'
       })
+
+      User.hasOne(models.Address,{
+        as: 'address',
+        foreignKey: 'userId'
+      })
     }
   }
   User.init({

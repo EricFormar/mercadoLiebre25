@@ -1,9 +1,19 @@
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
 
 // Configuración avanzada de almacenamiento
 const storage = multer.diskStorage({
-    destination: 'public/images/products',
+    destination: function(req, file, cb) {
+        const entityType = file.fieldname == 'avatar' ? 'users' : 'products';
+        const basePath = 'public/images';
+        const fullPath = path.join(basePath, entityType);
+        
+        // Crear directorio si no existe
+        fs.mkdirSync(fullPath, { recursive: true });
+        
+        cb(null, fullPath);
+    },
     filename: (req, file, cb) => {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
         cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));

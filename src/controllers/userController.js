@@ -51,8 +51,9 @@ module.exports = {
       try {
         const { email } = req.body
         const user = await db.User.findOne({
-          email
+          where : {email}
         })
+
         req.session.userLogin = {
           id: user.id,
           name: user.name,
@@ -67,7 +68,6 @@ module.exports = {
         })
       }
     }
-  
   },
   logout: (req, res) => { 
     req.session.destroy();
@@ -76,7 +76,13 @@ module.exports = {
   },
   profile: async (req, res) => {
     try {
-      const user = await db.User.findByPk(req.session.userLogin.id)
+      const user = await db.User.findByPk(req.session.userLogin.id, {
+        include: [
+          { association: 'rol'},
+          { association: 'address'}
+        ]
+      })
+            
       return res.render('users/profile', {
         user
       })
@@ -86,7 +92,46 @@ module.exports = {
       })
     }
   },
-  update: (req, res) => { },
+  update: async (req, res) => {
+    try {
+      const {name, surname, street, number, code, city, province} = req.body
+      
+      await db.User.update({
+        name: name.trim(),
+        surname: surname.trim(),
+      },{
+        where : {
+          id: req.params.id
+        }
+      });
+
+      const [address, created] = await db.Address.findOrCreate({
+        where: {
+          userId: req.params.id
+        }, 
+      });
+      
+      if(address) {
+        address.update({
+          street: street ? street.trim() : address.street,
+          number: number ? number : address.number,
+          code: code ? code.trim() : address.code,
+          city: city ? city.trim() : address.city,
+          provice: province ? province.trim() : address.provice,
+        });
+        await address.save();
+      }
+   
+      return res.redirect('/users/profile')
+      
+    } catch (error) {
+      console.log(error);
+      
+      return res.status(500).render('error', {
+        message: error.message,
+      })
+    }
+   },
   remove : async (req, res) => {
     try {
       await db.User.destroy({
