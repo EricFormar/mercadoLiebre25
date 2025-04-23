@@ -41,38 +41,33 @@ module.exports = {
     return res.render("users/login");
   },
   processLogin: async (req, res) => {
-    const errors = validationResult(req);
-    console.log(errors);
-    
+    const errors = validationResult(req);    
     if (!errors.isEmpty()) {
       return res.render("users/login", {
         errors: errors.mapped(),
         old: req.body,
       });
-    }
-    try {
-      // TODO: implementar validaciones
-      const { email, password } = req.body
-      const user = await db.User.findOne({
-        email
-      })
-      if (!user || !bcrypt.compareSync(password, user.password)) {
-        throw new Error("Credenciales inválidas");
+    }else {
+      try {
+        const { email } = req.body
+        const user = await db.User.findOne({
+          email
+        })
+        req.session.userLogin = {
+          id: user.id,
+          name: user.name,
+          rol: user.rolId
+        }
+  
+        return res.redirect('/')
+  
+      } catch (error) {
+        return res.status(500).render('error', {
+          message: error.message,
+        })
       }
-
-      req.session.userLogin = {
-        id: user.id,
-        name: user.name,
-        rol: user.rolId
-      }
-
-      return res.redirect('/')
-
-    } catch (error) {
-      return res.status(500).render('error', {
-        message: error.message,
-      })
     }
+  
   },
   profile: (req, res) => {
     return res.render('users/profile')
