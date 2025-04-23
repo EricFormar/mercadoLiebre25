@@ -1,40 +1,55 @@
 const bcrypt = require('bcrypt');
-const db = require('../database/models')
+const db = require('../database/models');
+const { validationResult } = require('express-validator');
 
 module.exports = {
   register: (req, res) => {
     return res.render("users/register");
   },
   processRegister: async (req, res) => {
-
-    try {
-      // TODO : agregar validaciones
-      const { name, surname, email, password } = req.body
-
-      db.User.create({
-        name: name.trim(),
-        surname: surname.trim(),
-        email: email.trim(),
-        password: bcrypt.hashSync(password, 10),
-        token: null,
-        validate: true,
-        lock: false,
-        rolId: 2
-      })
-
-      return res.redirect('/users/login');
-
-    } catch (error) {
-      return res.status(500).render('error', {
-        message: error.message,
-      })
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.render("users/register", {
+        errors: errors.mapped(),
+        old: req.body,
+      });
+    } else {
+      try {
+        const { name, surname, email, password } = req.body
+  
+        db.User.create({
+          name: name.trim(),
+          surname: surname.trim(),
+          email: email.trim(),
+          password: bcrypt.hashSync(password, 10),
+          token: null,
+          validate: true,
+          lock: false,
+          rolId: 2
+        })
+  
+        return res.redirect('/users/login');
+  
+      } catch (error) {
+        return res.status(500).render('error', {
+          message: error.message,
+        })
+      }
     }
   },
   login: (req, res) => {
     return res.render("users/login");
   },
   processLogin: async (req, res) => {
-
+    const errors = validationResult(req);
+    console.log(errors);
+    
+    if (!errors.isEmpty()) {
+      return res.render("users/login", {
+        errors: errors.mapped(),
+        old: req.body,
+      });
+    }
     try {
       // TODO: implementar validaciones
       const { email, password } = req.body
