@@ -3,6 +3,7 @@ const { register, login, processRegister, processLogin, profile, logout, update,
 const userRegisterValidator = require('../validations/userRegisterValidator.js');
 const userLoginValidator = require('../validations/userLoginValidator.js');
 const upload = require('../middlewares/upload.js');
+const userSessionCheck = require('../middlewares/userSessionCheck.js');
 const router = express.Router();
 
 // /users
@@ -12,7 +13,7 @@ router
     .get('/login', login)
     .post('/processLogin', userLoginValidator, processLogin)
     .get('/logout',logout)
-    .get('/profile', profile)
+    .get('/profile', userSessionCheck, profile)
     .put('/update/:id', upload.single('avatar'), update)
     .delete('/remove/:id', remove)
 

@@ -6,9 +6,9 @@ const router = express.Router();
 
 router
     .get('/', index)
-    .get('/admin', admin)
-    .get('/admin/products', adminProducts)
-    .get('/admin/users',  adminUsers)
+    .get('/admin', adminCheck, admin)
+    .get('/admin/products',adminCheck, adminProducts)
+    .get('/admin/users', adminCheck, adminUsers)
 
 
 

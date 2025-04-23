@@ -28,17 +28,17 @@
 
 		<nav class="main-navbar">
 			<ul class="left-navbar">
-				<li><a href="/products">Todos los productos</a></li>
-				<li><a href="/admin">Administrador</a></li>
-				<li><a href="/products/add">Vender</a></li>
-				<li><a href="#">Ayuda</a></li>
-			</ul>
+				<li><a href="/products">Todos los productos <i class="fas fa-tags"></i></a></li>
+				<% if (userLogin && userLogin.rol == 1) { %>
+					<li><a href="/admin">Administrador <i class="fas fa-tools"></i></a></li>
+				<% } %>
+				</ul>
 
 			<ul class="right-navbar">
 				<% if (locals.userLogin) { %>
-					<li><a href="/users/profile">Mi Perfil <i class="far fa-address-user"></i></a></li>
+					<li><a href="/users/profile">Mi Perfil <i class="fas fa-user-cog"></i></a></li>
 					<li><a href="/products/cart">Mis compras <i class="fas fa-shopping-basket"></i></a></li>
-					<li><a href="/users/logout">Cerrar sesión <i class="fa-solid fa-right-from-bracket"></i></i></a></li>
+					<li><a href="/users/logout">Cerrar sesión <i class="fas fa-sign-out-alt"></i></a></li>
 				<% }else{ %>
 				<li><a href="/users/register">Creá tu cuenta <i class="far fa-address-card"></i></a></li>
 				<li><a href="/users/login">Ingresá <i class="fas fa-sign-in-alt"></i></a></li>
