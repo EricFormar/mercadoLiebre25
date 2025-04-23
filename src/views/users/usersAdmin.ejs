@@ -52,13 +52,13 @@
 										<th scope="col">Apellido</th>
 										<th scope="col">Email</th>
 										<th scope="col">Validado</th>
-										<th scope="col">Bloquear</th>
+										<th scope="col">Bloqueado</th>
 										<th scope="col">Rol</th>
 										<th scope="col">Acciones</th>
 									</tr>
 								</thead>
 								<tbody>
-									<% users.forEach(({id, name, surname, email, validate, rol, lock})=> { %>
+									<% users.forEach(({id, name, surname, email, validate, rolId, lock})=> { %>
 										<tr>
 											<th scope="row">
 												<%= id %>
@@ -86,25 +86,25 @@
 											</td>
 											<td class="text-center">
 												<input type="checkbox" class="btn-check" id="btn-check-rol<%= id %>"
-													autocomplete="off" <%=rol=='admin' && 'checked' %>>
+													autocomplete="off" <%=rolId==1 && 'checked' %>>
 												<label class="btn btn-sm btn-outline-warning"
 													for="btn-check-rol<%= id %>"><i class="fas fa-user-shield"></i></label>
 											</td>
 											<td class="text-center">
-												<a class="btn btn-sm btn-success"><i class="fas fa-key"></i></a>
-											</td>
-											<td>
-
+												<div class="d-flex gap-2">
+													<a class="btn btn-sm btn-success"><i class="fas fa-key"></i></a>
+													<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modal<%= id %>">
+														<i class="fas fa-trash-alt"></i>
+													</button>
+													<%- include('../partials/modalAlertDelete',{ id, name, surname }) %> 
+												</div>
 											</td>
 										</tr>
 										<% }) %>
-
-
 								</tbody>
-
 							</table>
 							<tfoot>
-								<%- include('../partials/pager', { path : '/admin/users' , currentPage, totalPages }) %>
+								<%- include('../partials/pager', { path : '/admin/users' , filterCategory : null, currentPage, totalPages }) %>
 							</tfoot>
 						</div>
 					</div>

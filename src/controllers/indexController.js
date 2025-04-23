@@ -119,17 +119,22 @@ module.exports = {
             });
         }
     },
-    adminUsers: (req, res) => {
-        const users = readJson('users.json')
+    adminUsers: async (req, res) => {
+        try {
+            const users = await db.User.findAll();
+            const { page, perPage } = req.query
 
-        const { page, perPage } = req.query
+            const { items, total } = paginator(users, page, perPage)
 
-        const { items, total } = paginator(users, page, perPage)
-
-        return res.render('users/usersAdmin', {
-            users: items,
-            currentPage: page || 1,
-            totalPages: total,
-        })
+            return res.render('users/usersAdmin', {
+                users: items,
+                currentPage: page || 1,
+                totalPages: total,
+            })
+        } catch (error) {
+            return res.status(500).render('error', {
+                message: error.message,
+            })
+        }
     }
 }

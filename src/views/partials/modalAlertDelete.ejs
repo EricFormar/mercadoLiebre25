@@ -1,0 +1,17 @@
+<div class="modal fade" id="modal<%= id %>" tabindex="-1" aria-labelledby="modal<%= id %>Label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modal<%= id %>Label">Advertencia</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="/users/remove/<%= id %>?_method=DELETE" method="POST">
+                <h5 class="py-3">¿Desea eliminar el usuario <%= name %> <%= surname %>?</h5>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-danger">Sí, eliminalo</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>

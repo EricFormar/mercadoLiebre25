@@ -69,13 +69,36 @@ module.exports = {
     }
   
   },
-  profile: (req, res) => {
-    return res.render('users/profile')
-  },
-  update: (req, res) => { },
   logout: (req, res) => { 
     req.session.destroy();
     res.clearCookie('connect.sid');
     return res.redirect('/');
   },
+  profile: async (req, res) => {
+    try {
+      const user = await db.User.findByPk(req.session.userLogin.id)
+      return res.render('users/profile', {
+        user
+      })
+    } catch (error) {
+      return res.status(500).render('error', {
+        message: error.message,
+      })
+    }
+  },
+  update: (req, res) => { },
+  remove : async (req, res) => {
+    try {
+      await db.User.destroy({
+        where: {
+          id: req.params.id
+        }
+      })
+      return res.redirect('/admin/users')
+    } catch (error) {
+      return res.status(500).render('error', {
+        message: error.message,
+      })
+    }
+   }
 };
