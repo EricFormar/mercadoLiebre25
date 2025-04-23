@@ -1,9 +1,9 @@
 const express = require('express');
+const router = express.Router();
 const { list, detail, add, create, edit, update, remove, search, showCart} = require('../controllers/productsController.js');
 const userSessionCheck = require('../middlewares/userSessionCheck.js');
 const upload = require('../middlewares/upload.js');
 const productValidation = require('../validations/productValidator.js');
-const router = express.Router();
 
 // /products
 
