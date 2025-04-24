@@ -17,7 +17,7 @@ const getAllCategories = async (req, res) => {
   try {
     const categories = await db.Category.findAll({
       attributes: {
-        exclude: []
+        exclude: ['createdAt', 'updatedAt']
       },
       include: [
         {
