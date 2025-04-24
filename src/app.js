@@ -11,6 +11,8 @@ const usersRouter = require('./routes/users');
 const productsRouter = require('./routes/products');
 
 const apiProductsRouter = require('./routes/apis/products.routes');
+const apiCategoriesRouter = require('./routes/apis/categories.routes');
+const apiSubCategoriesRouter = require('./routes/apis/subcategories.routes');
 
 const app = express();
 
@@ -40,6 +42,8 @@ app.use('/products',productsRouter);
 
 /* APIS */
 app.use('/api/products',apiProductsRouter);
+app.use('/api/categories', apiCategoriesRouter);
+app.use('/api/subcategories', apiSubCategoriesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

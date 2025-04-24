@@ -24,7 +24,12 @@ const paginator = (items = [], page = 1, perPage = 10) => {
     }
 }
 
+const baseURL = (req) => {
+    return `${req.protocol}://${req.get('host')}`;
+  }
+
 module.exports = {
     toThousand,
-    paginator
+    paginator,
+    baseURL
 }
