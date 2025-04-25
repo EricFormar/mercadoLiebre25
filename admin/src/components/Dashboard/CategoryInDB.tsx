@@ -8,7 +8,7 @@ const CategoryInDB = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch("http://localhost:3001/api/categories")
+    fetch(`${import.meta.env.VITE_API_URL}/categories`)
       .then((response) => response.json())
       .then((result) => {
         if (result.success) {
