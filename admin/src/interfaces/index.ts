@@ -1,6 +1,6 @@
 export interface Section {
-    id : number;
-    name : string;
+    id: number;
+    name: string;
 }
 
 export interface Category {
@@ -34,14 +34,22 @@ export interface Product {
     brand: Brand;
 }
 
-export interface CategoryCardProps {
-    category: Category;
+export interface Pagination {
+    totalItems: number,
+    currentPage: number,
+    totalPages: number,
+    hasNextPage: boolean,
+    hasPreviousPage: boolean,
+    nextPage: number,
+    previousPage: number
 }
 
-export interface SubcategoryCardProps {
-    subcategory: Subcategory;
-}
+export interface ModelProductResponse {
+    success: boolean;
+    message: string;
+    data: {
+        products: Product[];
+        pagination : Pagination;
+    }
 
-export interface ProductCardProps {
-    product: Product;
 }

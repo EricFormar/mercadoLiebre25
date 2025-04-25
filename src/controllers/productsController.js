@@ -9,11 +9,29 @@ module.exports = {
     list: async (req, res) => {
 
         try {
+            const { page = 1, limit = 10 } = req.query;
+
             const products = await db.Product.findAll({
-                include: ['images']
-            })
+                include: ['images'],
+                offset: (page - 1) * limit,
+                limit: limit,
+                distinct: true
+            });
+
+            const totalPages = Math.ceil(products.count / limit);
+            const currentPage = parseInt(page);
+
             return res.render('products/productsList', {
                 products,
+                pagination: {
+                    totalItems: products.count,
+                    currentPage,
+                    totalPages,
+                    hasNextPage: currentPage < totalPages,
+                    hasPreviousPage: currentPage > 1,
+                    nextPage: currentPage + 1,
+                    previousPage: currentPage - 1
+                },
                 toThousand
             })
         } catch (error) {

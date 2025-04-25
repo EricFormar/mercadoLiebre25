@@ -12,6 +12,8 @@ const usersRouter = require('./routes/users');
 const productsRouter = require('./routes/products');
 
 const apiProductsRouter = require('./routes/apis/products.routes');
+const apiSectionsRouter = require('./routes/apis/sections.routes');
+const apiBrandsRouter = require('./routes/apis/brands.routes');
 const apiCategoriesRouter = require('./routes/apis/categories.routes');
 const apiSubCategoriesRouter = require('./routes/apis/subcategories.routes');
 
@@ -44,6 +46,8 @@ app.use('/products',productsRouter);
 
 /* APIS */
 app.use('/api/products',apiProductsRouter);
+app.use('/api/sections',apiSectionsRouter);
+app.use('/api/brands', apiBrandsRouter);
 app.use('/api/categories', apiCategoriesRouter);
 app.use('/api/subcategories', apiSubCategoriesRouter);
 

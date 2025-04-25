@@ -5,19 +5,19 @@ const includeAssociations = {
   include: [
     {
       association: 'section',
-      attributes: ['id','name']
+      attributes: ['id', 'name']
     },
     {
       association: 'category',
-      attributes: ['id','name']
+      attributes: ['id', 'name']
     },
     {
       association: 'brand',
-      attributes: ['id','name']
+      attributes: ['id', 'name']
     },
     {
       association: 'subcategory',
-      attributes: ['id','name']
+      attributes: ['id', 'name']
     },
     {
       association: 'images',
@@ -36,23 +36,42 @@ const includeAssociations = {
  */
 const getAllProducts = async (req, res) => {
   try {
-    const products = await db.Product.findAll({
+    const { page = 1, limit = 8 } = req.query;
+    const {count, rows} = await db.Product.findAndCountAll({
       attributes: {
         exclude: ['sectionId', 'categoryId', 'brandId', 'subcategoryId']
       },
+      offset: (page - 1) * limit,
+      limit: limit,
+      distinct: true,
       ...includeAssociations
     });
+    
+    const totalPages = Math.ceil(count / limit);
+    const currentPage = parseInt(page);
+
     return res.status(200).json({
       success: true,
       message: 'Productos encontrados',
-      data: products.map(product => {
-        return {
-          ...product.dataValues,
-          images: product.images.map(image => {
-            return `${baseURL(req)}/images/products/${image.file}`
-          })
-        }
-      })
+      data: {
+        products: rows.map(product => {
+          return {
+            ...product.dataValues,
+            images: product.images.map(image => {
+              return `${baseURL(req)}/images/products/${image.file}`
+            })
+          }
+        }),
+        pagination: {
+          totalItems: count,
+          currentPage,
+          totalPages,
+          hasNextPage: currentPage < totalPages,
+          hasPreviousPage: currentPage > 1,
+          nextPage: currentPage + 1,
+          previousPage: currentPage - 1
+        },
+      }
     });
   } catch (err) {
     res.status(err.status || 500).json({
@@ -110,7 +129,7 @@ const getProductById = async (req, res) => {
         })
       }
     });
-    
+
   } catch (err) {
     return res.status(err.status || 500).json({
       success: false,
@@ -170,7 +189,7 @@ async function getProductsByCategory(req, res) {
           images: product.images.map(image => {
             return `${baseURL(req)}/images/products/${image.file}`
           }),
-          link : `${baseURL(req)}/api/products/${product.id}`
+          link: `${baseURL(req)}/api/products/${product.id}`
         }
       })
     })
