@@ -37,7 +37,13 @@
 			<ul class="right-navbar">
 				<% if (locals.userLogin) { %>
 					<li><a href="/users/profile">Mi Perfil <i class="fas fa-user-cog"></i></a></li>
-					<li><a href="/products/cart">Mis compras <i class="fas fa-shopping-basket"></i></a></li>
+					<li><a href="" data-bs-toggle="modal" data-bs-target="#showCart" class="position-relative">
+						<span>
+							Mis compras <i class="fas fa-shopping-basket"></i>
+						</span>
+						<span class="badge rounded-pill bg-primary position-absolute top-0"></span>
+					</a></li>
+					
 					<li><a href="/users/logout">Cerrar sesión <i class="fas fa-sign-out-alt"></i></a></li>
 				<% }else{ %>
 				<li><a href="/users/register">Creá tu cuenta <i class="far fa-address-card"></i></a></li>
@@ -47,3 +53,4 @@
 		</nav>
 	</div>
 </header>
+<%- include('./modalCart') %> 

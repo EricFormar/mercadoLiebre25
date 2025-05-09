@@ -5,12 +5,12 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     const sections = [
       {
-        name: 'visited',
+        name: 'Novedades',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        name: 'in-sale',
+        name: 'Ofertas',
         createdAt: new Date(),
         updatedAt: new Date()
       }
