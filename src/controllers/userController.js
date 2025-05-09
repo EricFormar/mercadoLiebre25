@@ -53,7 +53,7 @@ module.exports = {
         const user = await db.User.findOne({
           where : {email}
         })
-
+        req.session.cart = [];
         req.session.userLogin = {
           id: user.id,
           name: user.name,

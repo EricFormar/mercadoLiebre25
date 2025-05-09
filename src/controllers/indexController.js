@@ -23,7 +23,7 @@ module.exports = {
                     ]
                 })
             ])
-
+            
             res.render('home', {
                 newest,
                 inSale,

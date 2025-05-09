@@ -1,4 +1,5 @@
 const db = require('../../database/models');
+const queryOptions = require('../../helpers/queryOptions');
 
 /**
  * Obtiene todos las subcategorias de la base de datos
@@ -19,7 +20,8 @@ const getAllSubcategories = async (req, res) => {
           association: 'category',
           attributes: ['id','name']
         },
-      ]
+      ],
+      ...queryOptions(req.query)
     });
     return res.status(200).json({
       success: true,

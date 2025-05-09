@@ -1,4 +1,5 @@
 const db = require('../../database/models');
+const queryOptions = require('../../helpers/queryOptions');
 
 /**
  * Obtiene todos las marcas de la base de datos
@@ -13,11 +14,12 @@ const db = require('../../database/models');
  * @throws {Error} Si ocurre un error durante la consulta a la base de datos
  */
 const getAllBrands = async (req, res) => {
-  try {
+  try {    
     const brands = await db.Brand.findAll({
       attributes: {
         exclude: ['createdAt', 'updatedAt']
-      }
+      },
+      ...queryOptions(req.query)
     });
     return res.status(200).json({
       success: true,
