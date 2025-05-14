@@ -325,6 +325,11 @@ async function getProductsBySection(req, res) {
 
 async function createNewProduct(req, res) {
   try {
+    console.log({
+      body : req.body,
+      file : req.file,
+    });
+    
     const { name, description, price, discount, categoryId, subcategoryId, brandId, sectionId } = req.body;
     if (!name || !description || !price || !categoryId || !subcategoryId || !brandId || !sectionId) {
       let error = new Error('Faltan datos');
