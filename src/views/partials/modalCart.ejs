@@ -1,5 +1,5 @@
   <!-- Modal -->
-  <div class="modal fade" id="showCart" tabindex="-1" aria-labelledby="cartLabel" aria-hidden="true">
+  <div class="modal fade" id="showCart" tabindex="-1" aria-labelledby="cartLabel" aria-hidden="true" style="font-size: '16px';">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -32,7 +32,7 @@
               </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-sm btn-danger" id="btn-delete-cart">Vaciar carrito</button>
+            <button type="button" onclick="limpiarCarrito()" class="btn btn-sm btn-danger" id="btn-delete-cart">Vaciar carrito</button>
             <button type="button" class="btn btn-sm btn-success" data-bs-dismiss="modal">Seguir comprando</button>
             <a href="/compra" class="btn btn-sm btn-primary" id="btn-next-buy"> Finalizar compra</a>
         </div>

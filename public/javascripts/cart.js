@@ -50,26 +50,25 @@ const mostrarCantidad = (changuito) => {
  * @param {*} carrito Array de productos agregados al carrito
  */
 const cargarTabla = (carrito) => {
-    changuito.innerHTML = ""
+    changuito.innerHTML = null
     carrito.forEach(producto => {
         let item = `
             <td class="col-2">
-            <img class="w-100" src="${producto.image}" id="imgProduct"> 
+                <img class="w-100" src="${producto.image}" id="imgProduct"> 
             </td>
             <td class="text-center col-3 align-middle">
-            <a class="text-danger h5" onClick="removeItem(event,${producto.id})"><i class="fas fa-minus-square"></i></a>
-            <span class="h5">${producto.cantidad}<span>
-            <a class="text-success h5" onClick="addItem(event,${producto.id})"><i class="fas fa-plus-square"></i></a>
+                <a class="text-danger h5" onClick="removerItem(event,${producto.id})"><i class="fas fa-minus-square"></i></a>
+                <span class="h5">${producto.cantidad}<span>
+                <a class="text-success h5" onClick="agregarItem(event,${producto.id})"><i class="fas fa-plus-square"></i></a>
             </td>
             <td class="align-middle">
-            ${producto.nombre}
-            </td>
-           
-            <td class="align-middle">
-            <span>$</span><span class="float-end">${producto.precio}</span>
+                ${producto.nombre}
             </td>
             <td class="align-middle">
-            <span>$</span><span class="float-end">${producto.total}</span>
+                <span>$</span><span class="float-end">${producto.precio}</span>
+            </td>
+            <td class="align-middle">
+                <span>$</span><span class="float-end">${producto.total}</span>
             </td>
             `;
         changuito.innerHTML += item
@@ -99,7 +98,12 @@ const getCarrito = async () => {
 const agregarItem = async (e,id) => {
     e.preventDefault()
     try {
-        let response = await fetch(urlBase + 'api/cart/item/' + id)
+        let response = await fetch(urlBase + 'api/cart/add/' + id, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
         let result = await response.json()
         mostrarCantidad(result.data);
         cargarTabla(result.data);
@@ -110,7 +114,38 @@ const agregarItem = async (e,id) => {
 }
 
 //removeItem()
+const removerItem = async (e,id) => {
+    e.preventDefault()
+    try {
+        let response = await fetch(urlBase + 'api/cart/remove/' + id, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        let result = await response.json()
+        mostrarCantidad(result.data);
+        cargarTabla(result.data);
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 //emptyCart()
+const limpiarCarrito = async () => {
+    try {
+        let response = await fetch(urlBase + 'api/cart/remove/all',{
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        let result = await response.json()
+        mostrarCantidad(result.data);
+        cargarTabla(result.data);
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 getCarrito()
